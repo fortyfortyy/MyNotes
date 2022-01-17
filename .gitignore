@@ -1,2 +1,7 @@
 /venv
 /.env
+
+frontend/.yarn
+frontend/node_modules
+frontend/.idea
+
