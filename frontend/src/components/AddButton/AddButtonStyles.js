@@ -26,7 +26,11 @@ export const AddButtonS = styled.button`
     opacity: 1;
     transform: scale(1.05);
   }  
-    
+  
+  @media screen and (max-width: 640px){
+      width: 50px;
+      height: 50px;
+  }
 `
 
 // --color-main: #1693DB;

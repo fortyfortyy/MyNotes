@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-
-// export const DivNotes = styled.div`
-// `
-
 export const NotesHeader = styled.div`
   display: flex;
   align-items: center;
@@ -34,4 +30,3 @@ export const NotesList = styled.div`
        display: none;
   }
 `
-

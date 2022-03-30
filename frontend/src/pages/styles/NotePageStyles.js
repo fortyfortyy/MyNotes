@@ -66,13 +66,14 @@ export const TextArea = styled.textarea`
   height: 70vh;
   resize: none;
   scrollbar-width: none; /* Firefox */
+  border-radius: 25px;
   
   &:active {
      outline: none;
      border: none;
   }
   &:focus {
-     display: none;
+     outline: none;
   }
   &:-webkit-scrollbar {
     display: none;
