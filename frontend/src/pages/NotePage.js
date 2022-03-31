@@ -71,6 +71,7 @@ const NotePage = ({match, history}) => {
         } else if (noteId === 'new' && note.body) {
             createNote()
         }
+
         history.push('/')
     }
 
@@ -86,7 +87,9 @@ const NotePage = ({match, history}) => {
                 {noteId !== 'new' ? (
                     <Button onClick={deleteNote}>Delete</Button>
                 ) : (
-                    <Button onClick={handleSubmit}>Done</Button>
+                    <Link to='/'>
+                        <Button onClick={handleSubmit}>Done</Button>
+                    </Link>
                 )
                 }
             </NoteHeader>
