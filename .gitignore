@@ -4,4 +4,6 @@
 frontend/.yarn
 frontend/node_modules
 frontend/.idea
-
+database
+.idea
+api/__pycache__/
