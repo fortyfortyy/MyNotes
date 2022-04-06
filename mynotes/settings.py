@@ -31,6 +31,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+PASSWORD_RESET_TIMEOUT = 120  # reset password token after 2 min
 
 # Application definition
 
