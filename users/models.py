@@ -13,7 +13,7 @@ class MyAccountManager(BaseUserManager):
     Custom user model manager where email is the unique identifiers
     for authentication instead of username.
     """
-    def create_user(self, email, first_name, password=None):
+    def create_user(self, email, first_name, password=None, is_active=False):
         """
         Create and save a User with the given email, first name, last name and password.
         """
@@ -29,6 +29,7 @@ class MyAccountManager(BaseUserManager):
         user.is_admin = False
         user.is_superuser = False
         user.is_staff = False
+        user.is_active = is_active
         user.set_password(password)
         user.save(using=self._db)
         return user
