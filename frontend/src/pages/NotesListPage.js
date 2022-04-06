@@ -4,6 +4,7 @@ import AddButton from "../components/AddButton/AddButton";
 import {NotesCount, NotesHeader, NotesList, NotesTitle} from "./styles/NoteListPageStyles";
 import AuthContext from "../context/AuthContext";
 
+
 const NotesListPage = () => {
     let [notes, setNotes] = useState([])
     let {authTokens, logoutUser} = useContext(AuthContext)

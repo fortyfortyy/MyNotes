@@ -9,20 +9,20 @@ import {
     LoginForm,
     P,
     LoginButton,
-    DivButton,
+    DivButton, P2,
 } from "./styles/LoginPageStyles";
 
 import AuthContext from "../context/AuthContext";
 
 
 const LoginPage = () => {
-    let { loginUser } = useContext(AuthContext)
+    let {loginUser} = useContext(AuthContext)
     return (
-        <LoginFormContainer>
+        <LoginFormContainer id="loginPage">
             <LoginInfo>You need to be logged in to be able using this app</LoginInfo>
             <LoginTitle> Sign in to your account </LoginTitle>
             <LoginForm>
-                <form method='POST' onSubmit={ loginUser }>
+                <form method='POST' onSubmit={loginUser}>
                     <label id="id_email">
                         <Input type='email' name='email' placeholder='Your email' id='id_email' required/>
                     </label>
@@ -34,6 +34,10 @@ const LoginPage = () => {
                         <Link to='/reset/password'>
                             <P>Forgotten password?</P>
                         </Link>
+                        <Link to='/register'>
+                            <P2>Create account</P2>
+                        </Link>
+
                     </DivButton>
                 </form>
             </LoginForm>

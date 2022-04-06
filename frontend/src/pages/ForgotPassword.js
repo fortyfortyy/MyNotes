@@ -14,13 +14,13 @@ import AuthContext from "../context/AuthContext";
 
 
 const ForgotPassword = () => {
-    let { resetPasswordUser } = useContext(AuthContext)
+    let {resetPasswordUser} = useContext(AuthContext)
 
     return (
         <ResetPasswdFormContainer>
             <ResetPasswdTitle>Please enter your email to reset your password*</ResetPasswdTitle>
             <Form>
-                <form method='POST' onSubmit={ resetPasswordUser }>
+                <form method='POST' onSubmit={resetPasswordUser}>
                     <label id="id_email">
                         <Input type='email' name='email' placeholder='Your email' id='id_email' required/>
                     </label>
@@ -28,7 +28,8 @@ const ForgotPassword = () => {
                         <ResetPasswdButton type="submit">Send request</ResetPasswdButton>
                     </DivButton>
                 </form>
-                <P>*Please note if your account is associated with your email address, you should receive an email for the next steps.</P>
+                <P>*Please note if your account is associated with your email address, you should receive an email for
+                    the next steps.</P>
             </Form>
         </ResetPasswdFormContainer>
     )

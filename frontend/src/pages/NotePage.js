@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import {ReactComponent as ArrowLeft} from '../assets/arrow-left.svg'
 import {Button, H2, H3, NoteHeader, TextArea} from "./styles/NotePageStyles";
 import AuthContext from "../context/AuthContext";
+import {toast, ToastContainer} from "react-toastify";
+
 
 const NotePage = ({match, history}) => {
     let noteId = match.params.id // shows it as a 'new'
@@ -27,7 +29,7 @@ const NotePage = ({match, history}) => {
     }
 
     let createNote = async () => {
-        await fetch(`http://localhost:8000/notes/new/`, {
+        let response = await fetch(`http://localhost:8000/notes/new/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,6 +37,17 @@ const NotePage = ({match, history}) => {
             },
             body: JSON.stringify({...note})
         })
+        await response.json()
+        if (response.status === 201) {
+            toast.success("Note has been created!", {
+                position: toast.POSITION.TOP_RIGHT,
+            })
+        } else {
+            toast.error("Something gone wrong. Please try again. " +
+                "If the problem happen again, please contact support", {
+                position: toast.POSITION.TOP_RIGHT,
+            })
+        }
     }
 
 
@@ -99,6 +112,7 @@ const NotePage = ({match, history}) => {
             }} value={note?.body}>
 
             </TextArea>
+            <ToastContainer style={{top: '50px'}}/>
         </>
     )
 }

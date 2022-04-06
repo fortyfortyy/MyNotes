@@ -30,7 +30,8 @@ const RegisterPage = () => {
                         <Input type='password' name='password' placeholder='Enter password' id='id_password' required/>
                     </label>
                     <label id="id_password2">
-                        <Input type='password' name='password2' placeholder='Enter again password' id='id_password2' required/>
+                        <Input type='password' name='password2' placeholder='Enter again password' id='id_password2'
+                               required/>
                     </label>
                     <DivButton>
                         <RegisterButton type="submit">Sign Up</RegisterButton>

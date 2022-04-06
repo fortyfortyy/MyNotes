@@ -9,7 +9,7 @@ import {
 
 import React, {useContext} from "react";
 import AuthContext from "../context/AuthContext";
-// import {useParams} from "react-router-dom";
+
 
 const ResetPassword = () => {
     let {newUserPassword} = useContext(AuthContext)
