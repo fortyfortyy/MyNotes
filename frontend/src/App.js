@@ -11,22 +11,29 @@ import Navbar from "./components/Navbar/Navbar";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword"
+import ResetPassword from "./pages/ResetPassword";
+import ActivateAccount from "./pages/ActivateAccount";
+
 
 import NotesListPage from "./pages/NotesListPage";
 import NotePage from "./pages/NotePage";
 
-const App = () => {
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from "react-toastify";
 
+const App = () => {
     return (
         <MainContainer>
+            <ToastContainer style={{top: '50px'}}/>
+
             <AuthProvider>
                 <Navbar/>
 
                 <Route path='/login' component={LoginPage}/>
                 <Route path='/register' component={RegisterPage}/>
                 <Route path='/reset/password/' component={ForgotPassword}/>
-                <Route path='/set/password/:uid/:token/' component={ResetPassword}/>
+                <Route path='/account/set/password/:uid/:token/' component={ResetPassword}/>
+                <Route path='/account/activate/:uid/:token/' component={ActivateAccount}/>
 
                 <DivApp>
                     <PrivateRoute exact path='/' component={NotesListPage}/>
