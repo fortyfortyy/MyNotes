@@ -11,10 +11,19 @@ export const Container = styled.div`
  
     @media screen and (max-width: 640px) {
         font-size: 10px;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-row-gap: 0.5rem;
-        padding-bottom: 40px;
+        padding-bottom: 20px;
     }
+    
+    @media screen and (max-width: 820px) {
+        padding-bottom: 20px;
+    }
+    @media screen and (min-width: 1021){
+        grid-template-columns: repeat(7, 1fr);
+    }
+    
+    
 `;
 
 export const Div1 = styled.div`
@@ -22,16 +31,13 @@ export const Div1 = styled.div`
     padding: 10px;
     
     @media screen and (min-width: 641px){
-        justify-self: center;
-        font-size: 1.2rem;
-    }
-    
-    @media screen and (min-width: 641px){
           grid-area: 1 / 1 / 2 / 2;
           display: flex;
           flex-direction: row;
           align-content: center;
           justify-content: center;
+          justify-self: center;
+          font-size: 1.2rem;
     }
     
     @media screen and (min-width: 768px) and (max-width: 1024px){
@@ -41,6 +47,31 @@ export const Div1 = styled.div`
     
     @media screen and (max-width: 640px){
         display: none;
+        grid-area: 1 / 1 / 2 / 3;
+    }
+`;
+
+export const Div11 = styled.div`
+    font-size: 1.2rem;
+    padding: 10px;
+    
+    @media screen and (min-width: 641px){
+          grid-area: 1 / 1 / 2 / 2;
+          display: flex;
+          flex-direction: row;
+          align-content: center;
+          justify-content: center;
+          justify-self: center;
+          font-size: 1.2rem;
+    }
+    
+    @media screen and (min-width: 768px) and (max-width: 1024px){
+        grid-area: 1 / 1 / 2 / 3;
+        margin-right: 30px;
+    }
+    
+    @media screen and (max-width: 640px){
+        grid-area: 1 / 1 / 2 / 3;
     }
 `;
 
@@ -63,21 +94,28 @@ export const DivUser = styled.div`
     align-items: center;
     grid-area: 1 / 5;
     font-size: 1.5rem;
+    margin-right: 20px;
     
     @media screen and (max-width: 640px) {
-        grid-area: 1 / 1 / 2 / 2;
+        grid-area: 1 / 1 / 1 / 3;
         font-size: 1.2rem;
+        justify-self: start;
     } 
     
-    @media screen and (mix-width: 821px) {
+    @media screen and (max-width: 1020px) {
          margin-right: 30px;
+    }
+    
+    @media screen and (min-width: 1021px) {
+        grid-area: 1 / 5 / 1 / 7;
+        
     }
 `;
 
 export const Div3 = styled.div`
     grid-area: 1 / 6;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     justify-self: center;
     justify-items: center;
     align-items: center;
@@ -94,35 +132,118 @@ export const Div3 = styled.div`
         justify-self: center;
     }
 
-    @media screen and (max-width: 768px){
-    & > :nth-child(1) {
-        grid-area: 1 / 3;
-    } 
-    
-    @media screen and (max-width: 640px){
-        grid-gap: 0;
-    } 
-    
-    & > :nth-child(2) {
-        grid-area: 1 / 1;
-    } 
-    
-    & > :nth-child(3) {
-        grid-area: 1 / 5;
+    @media screen and (max-width: 768px) {
+        & > :nth-child(1) {
+            grid-area: 1 / 3;
+        } 
+        
+        & > :nth-child(2) {
+            grid-area: 1 / 1;
+        } 
+        
+        & > :nth-child(3) {
+            grid-area: 1 / 2;
+        }
+         
+        & > :nth-child(4) {
+            grid-area: 1 / 6;
+        } 
     }
-     
-    & > :nth-child(4) {
-        grid-area: 1 / 6;
-    } 
     
     @media screen and (max-width: 640px) {
-        grid-template-columns: repeat(6, 1fr);
-        grid-area: 1 / 1 / 1 / 4;
+        grid-area: 1 / 4;
         padding: 10px;
         font-size: 1.2rem;
         width: 100%;
+        display: grid;
+        grid-gap: 0;
+        
+        & > :nth-child(1){
+            grid-area: 2 / 1 / 2 / 3;
+        }
     }
+    
+    @media screen and (max-width: 1200px) {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 0;
+        
+        & > :nth-child(1){
+            grid-area: 2 / 1 / 2 / 3;
+        }
+    }
+    
+    @media screen and (min-width: 821px) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-area: 1 / 7;
+        grid-gap: 0;
+    }
+    
 `;
+
+export const Div4 = styled.div`
+    grid-area: 1 / 6;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-self: center;
+    justify-items: center;
+    align-items: center;
+    grid-gap: 1.5rem;
+    align-items: center;  
+    font-size: 1.5rem;
+    
+    &:hover {
+        color: #fff;
+    }
+    
+    & > :nth-child(1) {
+        grid-area: 1 / 1 / 2 / 2;
+        justify-self: center;
+    }
+
+    @media screen and (max-width: 820px) {
+        grid-gap: 0;
+        
+        & > :nth-child(1) {
+            grid-area: 1 / 3;
+        } 
+        
+        & > :nth-child(2) {
+            grid-area: 1 / 1;
+        } 
+        
+        & > :nth-child(3) {
+            grid-area: 1 / 2;
+        }
+         
+        & > :nth-child(4) {
+            grid-area: 1 / 6;
+        } 
+    }
+    
+    @media screen and (max-width: 640px) {
+        padding: 5px;
+        font-size: 1.2rem;
+        width: 100%;
+        grid-gap: 0;
+        grid-template-columns: repeat(1, 1fr);
+        
+        & > :nth-child(1){
+            grid-area: 1 / 1;
+        }
+        
+        & > :nth-child(2) {
+            grid-area: 1/ 6;
+        } 
+        
+        & > :nth-child(3) {
+            grid-area: 1 / 5;
+        }
+    }
+    
+`;
+
 
 // Navigation Links
 export const NavLink = styled.a`
