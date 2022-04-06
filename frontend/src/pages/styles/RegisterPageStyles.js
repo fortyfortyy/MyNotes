@@ -7,17 +7,13 @@ export const RegisterFormContainer = styled.div`
     justify-items: center;
     margin: 0 auto;
     grid-gap: 1.5rem;
+    padding-top: 30px;
 `
 
 export const RegisterTitle = styled.div`
     transition: 1s ease;
     font-size: 22px;
-    padding: 30px 0;
-    
-    @media screen and (max-width: 768px) {
-       font-size: 20px;
-    }
-    
+    padding: 20px 0;
 `
 
 export const RegisterForm = styled.div`
@@ -57,7 +53,7 @@ export const DivButton = styled.div`
     grid-gap: 1rem;
     
     @media screen and (max-width: 640px) {
-       max-width: 60%;
+       max-width: 100%;
        margin: 30px 10px;
     }
 `
@@ -96,9 +92,7 @@ export const RegisterButton = styled.button`
     }
     
     @media screen and (max-width: 768px) {
-       padding: 5px 10px;
-       font-size: 15px;
        width: 80%;
-        justify-self: center;
+       justify-self: center;
     }
 `

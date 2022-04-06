@@ -14,6 +14,7 @@ export const LoginInfo = styled.div`
     
     @media screen and (max-width: 640px) {
        font-size: 14px;
+       padding-top: 60px;
     }
 `
 
@@ -69,12 +70,29 @@ export const DivButton = styled.div`
     display: grid;
     max-width: 70%;
     margin: 60px 10px;
-    grid-gap: 1rem;
+    grid-gap: 2rem;
     justify-items: center;
+    align-items: center;
+    
+    & :nth-child(3){
+        grid-area: 2 / 1 / 2 / 3;
+    }
+
+    @media screen and (min-width: 641px) {
+       & :nth-child(1){
+            // padding-right: 20px;
+       }
+
+       & :nth-child(2){
+            // padding-left: 20px;
+       }
+    }
+    
     
     @media screen and (max-width: 640px) {
-       max-width: 60%;
-       margin: 30px 10px;
+       grid-gap: 0;
+       max-width: 100%;
+       margin: 30px 10px;       
     }
 `
 
@@ -98,9 +116,32 @@ export const P = styled.p`
     }
     
     @media screen and (max-width: 1280px) {
-       padding: 10px 20px;
+       padding: 25px 20px;
     }
 `
+
+export const P2 = styled.p`
+    color: #d6d1d1;
+    font-size: 17px;
+    text-align: center;
+    cursor: pointer;
+    
+    &:hover {
+        transition: 0.5s ease;
+        color: #fff;
+        cursor: pointer; 
+    }
+    
+    @media screen and (max-width: 1024px) {
+       font-size: 15px;
+       padding: 8px 18px;
+    }
+    
+    @media screen and (max-width: 1280px) {
+       padding: 25px 20px;
+    }
+`
+
 
 export const LoginButton = styled.button`
     transition: 0.5s ease;
@@ -108,6 +149,8 @@ export const LoginButton = styled.button`
     border-radius: 10px;
     font-size: 17px;
     padding: 10px 20px;
+    grid-area: 1/ 1/ 1/ 4;
+    width: 50%;
     
     &:hover {
         outline: 0;
