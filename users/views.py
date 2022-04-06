@@ -1,17 +1,20 @@
-import asyncio
-
 from rest_framework import generics, permissions
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.views import APIView
+from rest_framework.renderers import JSONRenderer
+
+from rest_framework_simplejwt.views import TokenViewBase
+from rest_framework_simplejwt.exceptions import AuthenticationFailed, InvalidToken, TokenError
 
 from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import smart_str
 
-from api.utils import send_reset_password_email
-from users.models import ProfileUser
+from users.utils import send_reset_password_email
 from users.utils import account_token
-from users.serializers import MyTokenObtainPairSerializer, ForgottenPasswordSerializer, \
-    ChangePasswordSerializer, RegisterSerializer
+from users.models import ProfileUser
+from users.serializers import CustomTokenObtainPairSerializer, ForgottenPasswordSerializer, \
+    ChangePasswordSerializer, RegisterSerializer, InActiveUser
 
 
 class RegisterUserView(generics.CreateAPIView):
@@ -25,11 +28,57 @@ class RegisterUserView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
 
-class MyTokenObtainPairView(TokenObtainPairView):
+class ActivateAccountView(APIView):
     """
-    Checks if the given credentials (login and password) are valid, then set the new token session and log in
+    Checks whether the link is valid for the given user.
+    Then activate account.
     """
-    serializer_class = MyTokenObtainPairSerializer
+    model = ProfileUser
+    renderer_classes = [JSONRenderer]
+
+    def get(self, request, *args, **kwargs):
+        try:
+            uid = smart_str(urlsafe_base64_decode(kwargs['uidb64']))
+            profile = self.model.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, KeyError, self.model.DoesNotExist):
+            profile = None
+
+        if profile is not None and account_token.check_token(profile, kwargs['token']):
+            profile.is_active = True
+
+            # Create temporary attribute to send welcome message
+            # When it's done, delete that attribute
+            try:
+                profile._sendwelcomemessage = True
+                profile.save()
+            finally:
+                del profile._sendwelcomemessage
+
+            return Response({'account': 'Account has been activated!'}, status=status.HTTP_200_OK)
+
+        content = {'account': 'Your link is invalid or your account is already activated'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CustomTokenObtainPairView(TokenViewBase):
+    """
+    Takes a set of user credentials and returns an access and refresh JSON web
+    token pair to prove the authentication of those credentials.
+
+    Returns HTTP 406 when user is inactive and HTTP 401 when login credentials are invalid.
+    """
+    serializer_class = CustomTokenObtainPairSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        try:
+            serializer.is_valid(raise_exception=True)
+        except AuthenticationFailed:
+            raise InActiveUser()
+        except TokenError:
+            raise InvalidToken()
+
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
 
 class ForgottenPasswordView(generics.CreateAPIView):
@@ -39,7 +88,7 @@ class ForgottenPasswordView(generics.CreateAPIView):
     serializer_class = ForgottenPasswordSerializer
     model = ProfileUser
 
-    async def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         serialized_form = self.get_serializer(data=request.data)
         if serialized_form.is_valid():
             email = serialized_form.validated_data['email']
@@ -49,8 +98,7 @@ class ForgottenPasswordView(generics.CreateAPIView):
                 profile = None
 
             if profile:
-                send_email = asyncio.create_task(send_reset_password_email(profile))
-                await send_email
+                send_reset_password_email(profile)
 
         headers = self.get_success_headers(serialized_form.data)
         return Response(serialized_form.data, status=status.HTTP_200_OK, headers=headers)
