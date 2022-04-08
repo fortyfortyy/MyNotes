@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # django apps
     'django.contrib.sites',
     'corsheaders',
+    'requests',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
 
@@ -196,3 +197,4 @@ LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/login"
 LOGOUT_REDIRECT_URL = "/"
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
+RECAPTCHA = str(os.getenv('RECAPTCHA'))
