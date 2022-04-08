@@ -1,5 +1,11 @@
+import requests
+
+from mynotes import settings
+
 from rest_framework import generics
+from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from api.serializers import NoteSerializer
 from api.models import Note
@@ -46,3 +52,16 @@ class NoteListView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         user = self.request.user.pk
         return Note.objects.filter(owner=user)
+
+
+@api_view(['POST'])
+def recaptcha(request):
+    r = requests.post(
+      'https://www.google.com/recaptcha/api/siteverify',
+      data={
+        'secret': settings.RECAPTCHA,
+        'response': request.data['captcha_value'],
+      }
+    )
+
+    return Response({'captcha': r.json()})
