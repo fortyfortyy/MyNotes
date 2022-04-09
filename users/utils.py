@@ -1,5 +1,5 @@
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from six import text_type
+import threading
 
 #  imports needed for email
 from django.core.mail import EmailMessage
@@ -8,9 +8,30 @@ from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib.sites.models import Site
-
+# ---
+import time
+#generate token
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+# ---
 
 from mynotes import settings
+
+
+class EmailThread(threading.Thread):
+    def __init__(self, subject, html_content, recipient_list):
+        self.subject = subject
+        self.recipient_list = recipient_list
+        self.html_content = html_content
+        threading.Thread.__init__(self)
+
+    def run (self):
+        msg = EmailMessage(self.subject, self.html_content, settings.EMAIL_HOST_USER, self.recipient_list)
+        msg.content_subtype = "html"
+        msg.send()
+
+
+def send_html_mail(subject, html_content, recipient_list):
+    EmailThread(subject, html_content, recipient_list).start()
 
 
 class TokenGenerator(PasswordResetTokenGenerator):
@@ -34,10 +55,4 @@ def send_reset_password_email(profile):
         'token': account_token.make_token(profile),
     })
 
-    mail = EmailMessage(
-        subject,
-        message,
-        settings.EMAIL_HOST_USER,
-        [profile.email],
-    )
-    mail.send()
+    send_html_mail(subject, message, [profile.email])
