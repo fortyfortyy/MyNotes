@@ -4,15 +4,14 @@ from django.dispatch import receiver
 from django.contrib.sites.models import Site
 
 #  imports needed for email
-from django.core.mail import EmailMessage
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 
 from users.models import ProfileUser
 from users.utils import account_token
+from users.utils import send_html_mail
 
-from mynotes import settings
 
 
 @receiver(post_save, sender=ProfileUser)
@@ -31,13 +30,7 @@ def send_activate_link_account(sender, instance, created, **kwargs):
             'token': account_token.make_token(profile),
         })
 
-        mail = EmailMessage(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            [profile.email],
-        )
-        mail.send()
+        send_html_mail(subject, message, [profile.email])
 
 
 @receiver(post_save, sender=ProfileUser)
@@ -53,10 +46,4 @@ def send_welcome_user_mail(sender, instance, created, **kwargs):
             'profile': profile,
         })
 
-        mail = EmailMessage(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            [profile.email],
-        )
-        mail.send()
+        send_html_mail(subject, message, [profile.email])
