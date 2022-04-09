@@ -1,5 +1,8 @@
 import React, {useContext} from "react";
 
+import ReCAPTCHA from "react-google-recaptcha";
+
+import AuthContext from "../context/AuthContext";
 import {
     ResetPasswdButton,
     ResetPasswdFormContainer,
@@ -10,11 +13,9 @@ import {
     P,
 } from "./styles/ForgotPasswordStyles";
 
-import AuthContext from "../context/AuthContext";
-
 
 const ForgotPassword = () => {
-    let {resetPasswordUser} = useContext(AuthContext)
+    let {resetPasswordUser, handleRecaptcha, captchaResult} = useContext(AuthContext)
 
     return (
         <ResetPasswdFormContainer>
@@ -24,8 +25,14 @@ const ForgotPassword = () => {
                     <label id="id_email">
                         <Input type='email' name='email' placeholder='Your email' id='id_email' required/>
                     </label>
+                    <ReCAPTCHA
+                        sitekey="6LcSYlAfAAAAAKexdkjx7V90mymtCqUuJx-JOJZS"
+                        onChange={handleRecaptcha}
+                    />
                     <DivButton>
-                        <ResetPasswdButton type="submit">Send request</ResetPasswdButton>
+                        {
+                            captchaResult && <ResetPasswdButton type="submit">Send request</ResetPasswdButton>
+                        }
                     </DivButton>
                 </form>
                 <P>*Please note if your account is associated with your email address, you should receive an email for

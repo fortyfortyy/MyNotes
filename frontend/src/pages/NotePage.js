@@ -1,9 +1,10 @@
 import React, {useState, useEffect, useContext} from "react";
 import {Link} from 'react-router-dom';
+import {toast, ToastContainer} from "react-toastify";
+
+import AuthContext from "../context/AuthContext";
 import {ReactComponent as ArrowLeft} from '../assets/arrow-left.svg'
 import {Button, H2, H3, NoteHeader, TextArea} from "./styles/NotePageStyles";
-import AuthContext from "../context/AuthContext";
-import {toast, ToastContainer} from "react-toastify";
 
 
 const NotePage = ({match, history}) => {
@@ -41,7 +42,9 @@ const NotePage = ({match, history}) => {
         if (response.status === 201) {
             toast.success("Note has been created!", {
                 position: toast.POSITION.TOP_RIGHT,
+                autoClose: 1500,
             })
+            history.push('/')
         } else {
             toast.error("Something gone wrong. Please try again. " +
                 "If the problem happen again, please contact support", {
@@ -72,6 +75,10 @@ const NotePage = ({match, history}) => {
                 body: JSON.stringify(note)
             }
         )
+        toast.error("Note has been delated!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 1000,
+        })
         // redirect to the homepage
         history.push('/')
     }

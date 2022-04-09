@@ -8,6 +8,7 @@ import PrivateRoute from './utils/PrivateRoute';
 import {AuthProvider} from './context/AuthContext';
 
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -21,6 +22,7 @@ import NotePage from "./pages/NotePage";
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from "react-toastify";
 
+
 const App = () => {
     return (
         <MainContainer>
@@ -28,17 +30,18 @@ const App = () => {
 
             <AuthProvider>
                 <Navbar/>
+                    <Route path='/login' component={LoginPage}/>
+                    <Route path='/register' component={RegisterPage}/>
+                    <Route path='/reset/password/' component={ForgotPassword}/>
+                    <Route path='/account/set/password/:uid/:token/' component={ResetPassword}/>
+                    <Route path='/account/activate/:uid/:token/' component={ActivateAccount}/>
 
-                <Route path='/login' component={LoginPage}/>
-                <Route path='/register' component={RegisterPage}/>
-                <Route path='/reset/password/' component={ForgotPassword}/>
-                <Route path='/account/set/password/:uid/:token/' component={ResetPassword}/>
-                <Route path='/account/activate/:uid/:token/' component={ActivateAccount}/>
+                    <DivApp>
+                        <PrivateRoute exact path='/' component={NotesListPage}/>
+                        <PrivateRoute path='/notes/:id' component={NotePage}/>
+                    </DivApp>
 
-                <DivApp>
-                    <PrivateRoute exact path='/' component={NotesListPage}/>
-                    <PrivateRoute path='/notes/:id' component={NotePage}/>
-                </DivApp>
+                <Footer/>
             </AuthProvider>
         </MainContainer>
     )

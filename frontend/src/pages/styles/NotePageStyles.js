@@ -5,7 +5,7 @@ export const NoteHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #1693DB;
+  color: #f6f9fc;
   padding: 10px;
 `
 
@@ -13,12 +13,12 @@ export const H2 = styled.h2`
   display: flex;
   align-items: center;
   font-size: 20px;
-  color: #d6d1d1;
+  color: #f6f9fc;
   
   & svg {
     transition: 0.3s ease;
     cursor: pointer;
-    fill: #1693DB;
+    fill: #f6f9fc;
     width: 30px;
   }
   
@@ -33,7 +33,7 @@ export const H3 = styled.h3`
   display: flex;
   align-items: center;
   font-size: 20px;
-  color: #d6d1d1;
+  color: #f6f9fc;
   
   @media screen and (max-width: 640px){
     font-size: 17px;
@@ -51,7 +51,6 @@ export const Button = styled.button`
   transition: 0.3s ease;
   
   &:hover {
-    color: #d6d1d1;
     opacity: 1;
     transform: scale(1.05);
   }
@@ -59,11 +58,11 @@ export const Button = styled.button`
 `
 
 export const TextArea = styled.textarea`
-  background-color: #2e3235;
+  background-color: #15314b;
   border: none;
   padding: 16px 12px;
   width: 100%;
-  height: 70vh;
+  height: 69.35vh;
   resize: none;
   scrollbar-width: none; /* Firefox */
   border-radius: 25px;

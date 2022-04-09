@@ -19,6 +19,8 @@ export const AuthProvider = ({children}) => {
     const history = useHistory() // can't use Redirect, instead need to use that method
     const params = useParams()
 
+    const [captchaResult, setCaptchaResult] = useState()
+
 
     let registerUser = async (e) => {
         e.preventDefault()
@@ -34,7 +36,7 @@ export const AuthProvider = ({children}) => {
                 'password2': e.target.password2.value,
             })
         })
-        let data = await response.json()
+        await response.json()
         if (response.status === 201) {
             toast.success("Account has been created!", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -66,7 +68,7 @@ export const AuthProvider = ({children}) => {
                 'Content-Type': 'application/json',
             },
         })
-        let data = await response.json()
+        await response.json()
         if (response.status === 200) {
             toast.success("Your account has been activated!", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -155,7 +157,7 @@ export const AuthProvider = ({children}) => {
                 'token': token,
             })
         })
-        let data = await response.json()
+        await response.json()
         if (response.status === 200) {
             history.push('/')
             toast.success("Your password has been changed!", {
@@ -211,8 +213,21 @@ export const AuthProvider = ({children}) => {
         })
     }
 
+    let handleRecaptcha = (e) => {
+        fetch('http://127.0.0.1:8000/recaptcha/', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({'captcha_value': e})
+        })
+            .then(res => res.json())
+            .then(data => {
+                setCaptchaResult(data.captcha.success)
+            })
+    }
 
     let contextData = {
+        captchaResult: captchaResult,
+        handleRecaptcha: handleRecaptcha,
         activateAccount: activateAccount,
         registerUser: registerUser,
         loginUser: loginUser,

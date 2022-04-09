@@ -47,29 +47,41 @@ export const LoginForm = styled.div`
         grid-gap: 1.3rem;
         justify-items: center;
     }
+    
+    @media screen and (max-width: 768px) {
+        & form {
+            grid-gap: 1.5rem;
+        }
+    }
 `
 
 export const Input = styled.input`
-    transition: 0.5s ease;
+    transition: 0.2s ease;
     border-radius: 10px;
     font-size: 17px;
     padding: 10px 20px;
+    color: #001528 !important;
     
     &:focus {
         outline: 0;
-        border: 2px solid rgba(255, 255, 255, 0.5);  
+        border: 4px solid rgba(5, 67, 122, 1);  
     }
     
     @media screen and (max-width:  768px) {
        padding: 8px 10px;
        font-size: 15px;
+       
+       &:focus {
+            border: 3px solid rgba(67, 128, 255, 1); 
+       }
+       
     }
 `
 
 export const DivButton = styled.div`
     display: grid;
     max-width: 70%;
-    margin: 60px 10px;
+    margin: 30px 10px;
     grid-gap: 2rem;
     justify-items: center;
     align-items: center;
@@ -77,25 +89,13 @@ export const DivButton = styled.div`
     & :nth-child(3){
         grid-area: 2 / 1 / 2 / 3;
     }
-
-    @media screen and (min-width: 641px) {
-       & :nth-child(1){
-            // padding-right: 20px;
-       }
-
-       & :nth-child(2){
-            // padding-left: 20px;
-       }
-    }
-    
     
     @media screen and (max-width: 640px) {
        grid-gap: 0;
        max-width: 100%;
-       margin: 30px 10px;       
+       margin: 10px 10px;       
     }
 `
-
 
 export const P = styled.p`
     color: #d6d1d1;
@@ -105,8 +105,8 @@ export const P = styled.p`
     text-decoration: underline;
     
     &:hover {
-        transition: 0.5s ease;
-        color: #fff;
+        transition: 0.2s ease;
+        color: #f6f9fc;
         cursor: pointer; 
     }
     
@@ -127,8 +127,8 @@ export const P2 = styled.p`
     cursor: pointer;
     
     &:hover {
-        transition: 0.5s ease;
-        color: #fff;
+        transition: 0.2s ease;
+        color: #f6f9fc;
         cursor: pointer; 
     }
     
@@ -141,7 +141,6 @@ export const P2 = styled.p`
        padding: 25px 20px;
     }
 `
-
 
 export const LoginButton = styled.button`
     transition: 0.5s ease;

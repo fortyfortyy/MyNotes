@@ -1,3 +1,6 @@
+import React, {useContext} from "react";
+
+import AuthContext from "../context/AuthContext";
 import {
     DivButton,
     Form,
@@ -6,8 +9,6 @@ import {
     Title,
 } from "./styles/ActivateAccountStyles";
 
-import React, {useContext} from "react";
-import AuthContext from "../context/AuthContext";
 
 const ActivateAccount = () => {
     let {activateAccount} = useContext(AuthContext)

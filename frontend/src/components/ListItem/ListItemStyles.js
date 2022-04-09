@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 
 export const NotesListItem = styled.div`
-  border-bottom: 1px solid #252629;
-  padding: 10px 16px;
+  border-bottom: 1px solid #001528;
+  padding: 4px 16px;
   transition: all 0.2s ease-in-out;
   
   :hover {
-    background-color: #1f2124;
+    background-color: #001528;
+    color: #f6f9fc;
     cursor: pointer;
   }
 `

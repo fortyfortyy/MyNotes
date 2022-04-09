@@ -5,7 +5,7 @@ export const AddButtonS = styled.button`
   position: absolute;
   bottom: 24px;
   right: 16px;
-  background: #1693DB;
+  background: #f6f9fc;
   border: none;
   width: 60px;
   height: 60px;
@@ -22,9 +22,9 @@ export const AddButtonS = styled.button`
   }
   
   &:hover {
-    background: #d6d1d1;
+    background: #fff;
     opacity: 1;
-    transform: scale(1.05);
+    transform: scale(1.08);
   }  
   
   @media screen and (max-width: 640px){

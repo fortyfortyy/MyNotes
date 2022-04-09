@@ -27,29 +27,38 @@ export const RegisterForm = styled.div`
         grid-gap: 1.3rem;
         justify-items: center;
     }
+    
+    @media screen and (max-width: 768px) {
+        & form {
+            grid-gap: 1.5rem;
+        }
+    }
 `
 
 export const Input = styled.input`
-    transition: 0.5s ease;
+    transition: 0.2s ease;
     border-radius: 10px;
     font-size: 17px;
     padding: 10px 20px;
-   
+     
     &:focus {
         outline: 0;
-        border: 2px solid rgba(255, 255, 255, 0.5);  
+        border: 4px solid rgba(5, 67, 122, 1);  
     }   
       
     @media screen and (max-width: 768px) {
-       padding: 8px 10px;
        font-size: 15px;
+       
+       &:focus {
+           border: 3px solid rgba(67, 128, 255, 1); 
+       }
     }
 `
 
 export const DivButton = styled.div`
     display: grid;
     max-width: 70%;
-    margin: 60px 10px;
+    margin: 30px 10px;
     grid-gap: 1rem;
     
     @media screen and (max-width: 640px) {
@@ -80,7 +89,7 @@ export const P = styled.p`
 
 export const RegisterButton = styled.button`
     transition: 0.5s ease;
-    color: #1f2124;
+    color: #001528;
     border-radius: 10px;
     font-size: 17px;
     padding: 10px 20px;
@@ -94,5 +103,36 @@ export const RegisterButton = styled.button`
     @media screen and (max-width: 768px) {
        width: 80%;
        justify-self: center;
+    }
+`
+
+export const I = styled.i`
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    color: #05437a;
+
+    :hover {
+        color: #001528;
+        cursor: pointer;
+    }
+`
+
+
+export const Label = styled.label`
+    position: relative;
+`
+
+export const InputError = styled.p`
+    color: #bf1650;
+    font-size: 14px;
+    
+    &:before {
+        display: inline;
+        content: "⚠ ";
+    }
+    
+    @media screen and (max-width: 768px) {
+       font-size: 11px;
     }
 `

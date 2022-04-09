@@ -20,7 +20,6 @@ const Header = () => {
                             <A>
                                 <DiDjango/>
                                 <DiReact/>
-                                <p>Portfolio</p>
                             </A>
                         </Link>
                     </Div1>
@@ -30,7 +29,6 @@ const Header = () => {
                             <A>
                                 <DiDjango/>
                                 <DiReact/>
-                                <p>Portfolio</p>
                             </A>
                         </Link>
                     </Div11>

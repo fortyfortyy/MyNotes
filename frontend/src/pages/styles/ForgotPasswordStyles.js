@@ -41,7 +41,7 @@ export const Form = styled.div`
 `
 
 export const P = styled.p`
-    color: #fff;
+    color: #f6f9fc;
     font-size: 12px;
     font-bold: normal;
     text-align: center;
@@ -57,14 +57,15 @@ export const P = styled.p`
 
 
 export const Input = styled.input`
-    transition: 0.5s ease;
+    transition: 0.2s ease;
     border-radius: 10px;
     font-size: 17px;
     padding: 10px 20px;
+    margin-bottom: 10px;
     
     &:focus {
         outline: 0;
-        border: 2px solid rgba(255, 255, 255, 0.5);  
+        border: 4px solid rgba(5, 67, 122, 1);  
     }
     
     @media screen and (max-width:  768px) {
@@ -89,7 +90,7 @@ export const DivButton = styled.div`
 
 export const ResetPasswdButton = styled.button`
     transition: 0.5s ease;
-    color: #1f2124;
+    color: #001528;
     border-radius: 10px;
     padding: 10px 20px;
     

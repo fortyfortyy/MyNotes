@@ -1,8 +1,10 @@
 import React, {useEffect, useState, useContext} from "react";
-import ListItem from '../components/ListItem/ListItem'
-import AddButton from "../components/AddButton/AddButton";
-import {NotesCount, NotesHeader, NotesList, NotesTitle} from "./styles/NoteListPageStyles";
+
 import AuthContext from "../context/AuthContext";
+import AddButton from "../components/AddButton/AddButton";
+import ListItem from '../components/ListItem/ListItem'
+
+import {NotesCount, NotesHeader, NotesList, NotesTitle} from "./styles/NoteListPageStyles";
 
 
 const NotesListPage = () => {
