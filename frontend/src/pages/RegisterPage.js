@@ -162,6 +162,7 @@ const RegisterPage = () => {
                         {
                             captchaResult && <RegisterButton type="submit">Sign Up</RegisterButton>
                         }
+                        <RegisterButton type="submit">Sign Up</RegisterButton>
                         <Link to='/login'>
                             <P>
                                 <strong>Already </strong> have an account?

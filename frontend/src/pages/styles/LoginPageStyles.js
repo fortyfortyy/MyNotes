@@ -144,7 +144,6 @@ export const P2 = styled.p`
 
 export const LoginButton = styled.button`
     transition: 0.5s ease;
-    color: #1f2124;
     border-radius: 10px;
     font-size: 17px;
     padding: 10px 20px;

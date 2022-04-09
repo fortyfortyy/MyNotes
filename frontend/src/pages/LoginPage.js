@@ -19,7 +19,6 @@ import {
 import {InputError} from "./styles/RegisterPageStyles";
 
 
-
 const LoginPage = () => {
     let {loginUser, handleRecaptcha, captchaResult} = useContext(AuthContext)
 
@@ -95,9 +94,10 @@ const LoginPage = () => {
                     />
 
                     <DivButton>
-                        {
-                            captchaResult && <LoginButton type="submit">Sign In</LoginButton>
-                        }
+                        {/*{*/}
+                        {/*    captchaResult && <LoginButton type="submit">Sign In</LoginButton>*/}
+                        {/*}*/}
+                        <LoginButton type="submit">Sign In</LoginButton>
                         <Link to='/reset/password'>
                             <P>Forgotten password?</P>
                         </Link>

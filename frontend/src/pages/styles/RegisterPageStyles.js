@@ -89,7 +89,6 @@ export const P = styled.p`
 
 export const RegisterButton = styled.button`
     transition: 0.5s ease;
-    color: #001528;
     border-radius: 10px;
     font-size: 17px;
     padding: 10px 20px;

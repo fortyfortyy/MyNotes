@@ -90,7 +90,6 @@ export const DivButton = styled.div`
 
 export const ResetPasswdButton = styled.button`
     transition: 0.5s ease;
-    color: #001528;
     border-radius: 10px;
     padding: 10px 20px;
     

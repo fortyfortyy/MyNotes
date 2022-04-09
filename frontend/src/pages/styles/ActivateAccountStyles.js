@@ -74,7 +74,6 @@ export const DivButton = styled.div`
 
 export const ActivateButton = styled.button`
     transition: 0.5s ease;
-    color: #1f2124;
     border-radius: 10px;
     padding: 10px 20px;
     

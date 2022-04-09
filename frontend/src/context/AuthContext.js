@@ -45,7 +45,7 @@ export const AuthProvider = ({children}) => {
                 position: toast.POSITION.TOP_RIGHT,
             })
             setTimeout(function () {
-                window.location.replace('/login');
+                history.push('/login')
             }, 7000);
 
         } else {
@@ -54,6 +54,7 @@ export const AuthProvider = ({children}) => {
             })
         }
     }
+
 
     let activateAccount = async (e) => {
         e.preventDefault()

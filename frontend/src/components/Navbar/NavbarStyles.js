@@ -41,7 +41,6 @@ export const Div11 = styled.div`
 
     @media screen and (max-width: 768px){
         padding: 0px;
-        display: none;
     }
 `;
 
