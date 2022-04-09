@@ -127,7 +127,7 @@ export const AuthProvider = ({children}) => {
             },
             body: JSON.stringify({'email': e.target.email.value})
         })
-        let data = await response.json()
+        await response.json()
         if (response.status === 200) {
             toast.success("Please check your email", {
                 position: toast.POSITION.TOP_RIGHT,

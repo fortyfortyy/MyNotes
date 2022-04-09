@@ -6,6 +6,10 @@ export const NotesHeader = styled.div`
   justify-content: space-between;
   color: #f6f9fc;
   padding: 10px 16px;
+  
+  @media screen and (max-width: 640px){
+      padding: 0px 16px;
+  }
 `
 
 export const NotesTitle = styled.h2`

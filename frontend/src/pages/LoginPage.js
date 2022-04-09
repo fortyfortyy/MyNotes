@@ -26,7 +26,6 @@ const LoginPage = () => {
     const {
         register,
         formState: {errors},
-        handleSubmit
     } = useForm({
         criteriaMode: "all"
     });
