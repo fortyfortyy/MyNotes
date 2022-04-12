@@ -9,14 +9,16 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
-from pathlib import Path
 import os
 from datetime import timedelta
+from pathlib import Path
+import django_heroku
+import dj_database_url
+from django.conf import settings
+import environ
 
-from dotenv import load_dotenv
-
-load_dotenv()
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 PASSWORD_RESET_TIMEOUT = 120  # reset password token after 2 min
 
 # Application definition
@@ -135,23 +137,15 @@ WSGI_APPLICATION = 'mynotes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
 DATABASES = {
     'default': {
-        'HOST': str(os.getenv('DB_HOST')),
-        'NAME': str(os.getenv('DB_NAME')),
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': str(os.getenv('DB_USER')),
-        'PASSWORD': str(os.getenv('DB_PASSWORD')),
-        'PORT': str(os.getenv('DB_PORT')),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'database',
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'database',
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -183,11 +177,11 @@ USE_I18N = True
 USE_TZ = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = str(os.getenv('EMAIL_HOST'))
-EMAIL_PORT = int(os.getenv('EMAIL_PORT'))
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = str(os.getenv('EMAIL_HOST_USER'))
-EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -206,6 +200,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://192.168.0.8",
 ]
 
 AUTH_USER_MODEL = 'users.ProfileUser'
@@ -217,7 +212,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.AllowAllUsersModelBackend',
     # 'allauth.account.auth_backends.AuthenticationBackend'
 ]
-RECAPTCHA = str(os.getenv('RECAPTCHA'))
+RECAPTCHA = env('RECAPTCHA')
 # SOCIALACCOUNT_PROVIDERS = {
 #     'google': {
 #         'SCOPE': [
@@ -229,3 +224,6 @@ RECAPTCHA = str(os.getenv('RECAPTCHA'))
 #         }
 #     }
 # }
+django_heroku.settings(locals())
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
