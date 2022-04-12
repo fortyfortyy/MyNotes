@@ -15,8 +15,8 @@ const ActivateAccount = () => {
 
     return (
         <Container>
-            <Title>Please click the button to activate your account</Title>
             <Form>
+                <Title>Please click the button to activate your account</Title>
                 <form method='POST' onSubmit={activateAccount}>
                     <DivButton>
                         <ActivateButton type="submit">Activate</ActivateButton>
