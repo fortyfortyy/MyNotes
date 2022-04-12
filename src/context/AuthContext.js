@@ -21,7 +21,7 @@ export const AuthProvider = ({children}) => {
 
     const [captchaResult, setCaptchaResult] = useState()
 
-    const baseURL = 'http://192.168.0.8:8000'
+    const baseURL = 'https://my-own-notes.herokuapp.com'
 
     let registerUser = async (e) => {
         let response = await fetch(`${baseURL}/account/api/register/`, {
@@ -63,7 +63,7 @@ export const AuthProvider = ({children}) => {
         let uid = url_split[3]
         let token = url_split[4]
 
-        let response = await fetch(`http://127.0.0.1:8000/account/activate/${uid}/${token}/`, {
+        let response = await fetch(`${baseURL}/account/activate/${uid}/${token}/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
