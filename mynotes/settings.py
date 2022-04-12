@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
-import dotenv
-import django_heroku
-import dj_database_url
 from django.conf import settings
 import environ
 
@@ -142,8 +139,16 @@ if DEBUG:
         }
     }
 else:
-    DATABASES = {}
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+    DATABASES = {
+        'default': {
+            'DATABASE_URL': str(os.getenv('DATABASE_URL')),
+            'DATABASE': str(os.getenv('DATABASE')),
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': str(os.getenv('USER')),
+            'PASSWORD': str(os.getenv('PASSWORD')),
+            'PORT': str(os.getenv('PORT')),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -206,8 +211,3 @@ LOGOUT_REDIRECT_URL = "/"
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend',]
 
 RECAPTCHA = env('RECAPTCHA')
-
-# Configure Django App for Heroku.
-django_heroku.settings(locals())
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
