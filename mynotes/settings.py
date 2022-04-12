@@ -34,7 +34,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1', 'mysimplenotes.app', 'my-own-notes.herokuapp.com']
 PASSWORD_RESET_TIMEOUT = 120  # reset password token after 2 min
