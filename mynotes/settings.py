@@ -34,7 +34,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = False
 
 ALLOWED_HOSTS = ['www.mysimplenotes.app', '127.0.0.1:8000', 'localhost', '192.168.0.8']
 PASSWORD_RESET_TIMEOUT = 120  # reset password token after 2 min
@@ -216,5 +216,9 @@ LOGOUT_REDIRECT_URL = "/"
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend',]
 
 RECAPTCHA = env('RECAPTCHA')
+
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
 
 django_heroku.settings(locals())
