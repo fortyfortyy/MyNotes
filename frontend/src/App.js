@@ -1,8 +1,8 @@
 import React from "react";
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import './App.css';
-import {DivApp, MainContainer} from "./styles/application";
+import {MainContainer} from "./styles/application";
 
 import PrivateRoute from './utils/PrivateRoute';
 import {AuthProvider} from './context/AuthContext';
@@ -20,26 +20,27 @@ import NotesListPage from "./pages/NotesListPage";
 import NotePage from "./pages/NotePage";
 
 import 'react-toastify/dist/ReactToastify.css';
-import {ToastContainer} from "react-toastify";
+import PageNotFound from "./components/PageNotFound/PageNotFoundStyles";
 
 
 const App = () => {
     return (
         <MainContainer>
-            <ToastContainer style={{top: '50px'}}/>
-
             <AuthProvider>
                 <Navbar/>
-                    <Route path='/login' component={LoginPage}/>
-                    <Route path='/register' component={RegisterPage}/>
-                    <Route path='/reset/password/' component={ForgotPassword}/>
-                    <Route path='/account/set/password/:uid/:token/' component={ResetPassword}/>
-                    <Route path='/account/activate/:uid/:token/' component={ActivateAccount}/>
 
-                    <DivApp>
-                        <PrivateRoute exact path='/' component={NotesListPage}/>
-                        <PrivateRoute path='/notes/:id' component={NotePage}/>
-                    </DivApp>
+                <Switch>
+                    <Route exact path='/login' component={LoginPage}/>
+                    <Route exact path='/register' component={RegisterPage}/>
+                    <Route exact path='/reset/password/' component={ForgotPassword}/>
+                    <Route exact path='/account/set/password/:uid/:token/' component={ResetPassword}/>
+                    <Route exact path='/account/activate/:uid/:token/' component={ActivateAccount}/>
+
+                    <PrivateRoute exact path='/' component={NotesListPage}/>
+                    <PrivateRoute exact path='/notes/:id' component={NotePage}/>
+
+                    <Route component={PageNotFound}/>
+                </Switch>
 
                 <Footer/>
             </AuthProvider>
