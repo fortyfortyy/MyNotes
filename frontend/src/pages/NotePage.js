@@ -5,12 +5,14 @@ import {toast, ToastContainer} from "react-toastify";
 import AuthContext from "../context/AuthContext";
 import {ReactComponent as ArrowLeft} from '../assets/arrow-left.svg'
 import {Button, H2, H3, NoteHeader, TextArea} from "./styles/NotePageStyles";
-
+import {DivApp} from "../styles/application";
 
 const NotePage = ({match, history}) => {
     let noteId = match.params.id // shows it as a 'new'
     let [note, setNote] = useState(null) // before adding things, note will be null
     let {authTokens} = useContext(AuthContext)
+
+    let baseURL = 'http://192.168.0.8:8000'
 
     useEffect(() => {
         getNote();
@@ -18,7 +20,7 @@ const NotePage = ({match, history}) => {
 
     let getNote = async () => {
         if (noteId === 'new') return
-        let response = await fetch(`http://localhost:8000/notes/${noteId}/`, {
+        let response = await fetch(`${baseURL}/notes/${noteId}/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +32,7 @@ const NotePage = ({match, history}) => {
     }
 
     let createNote = async () => {
-        let response = await fetch(`http://localhost:8000/notes/new/`, {
+        let response = await fetch(`${baseURL}/notes/new/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +57,7 @@ const NotePage = ({match, history}) => {
 
 
     let updateNote = async () => {
-        await fetch(`http://localhost:8000/notes/${noteId}/`, {
+        let response = await fetch(`${baseURL}/notes/${noteId}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,10 +65,22 @@ const NotePage = ({match, history}) => {
             },
             body: JSON.stringify({...note})
         })
+        await response.json()
+        if (response.status === 200) {
+            toast.success("Note has been saved!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 1500,
+            })
+        } else {
+            toast.error("Something gone wrong. Please try again. " +
+                "If the problem happen again, please contact support", {
+                position: toast.POSITION.TOP_RIGHT,
+            })
+        }
     }
 
     let deleteNote = async () => {
-        await fetch(`http://localhost:8000/notes/${noteId}/`, {
+        await fetch(`${baseURL}/notes/${noteId}/`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -96,21 +110,27 @@ const NotePage = ({match, history}) => {
     }
 
     return (
-        <>
+        <DivApp>
             <NoteHeader>
                 <H2>
                     <Link to='/'>
                         <ArrowLeft onClick={handleSubmit}/>
                     </Link>
                 </H2>
-                <H3> Create your note </H3>
+                {noteId !== 'new' ? (
+                        <H3> Edit your note </H3>
+                    ) : (
+                        <H3> Create your note </H3>
+                    )
+                }
+
                 {noteId !== 'new' ? (
                     <Button onClick={deleteNote}>Delete</Button>
-                ) : (
-                    <Link to='/'>
-                        <Button onClick={handleSubmit}>Done</Button>
-                    </Link>
-                )
+                    ) : (
+                        <Link to='/'>
+                            <Button onClick={handleSubmit}>Done</Button>
+                        </Link>
+                    )
                 }
             </NoteHeader>
 
@@ -120,7 +140,7 @@ const NotePage = ({match, history}) => {
 
             </TextArea>
             <ToastContainer style={{top: '50px'}}/>
-        </>
+        </DivApp>
     )
 }
 

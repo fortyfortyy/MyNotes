@@ -12,18 +12,50 @@ import {
     ResetPasswdTitle,
     P,
 } from "./styles/ForgotPasswordStyles";
+import {useForm} from "react-hook-form";
+import {ErrorMessage} from "@hookform/error-message";
+import {InputError} from "../styles/application";
 
 
 const ForgotPassword = () => {
     let {resetPasswordUser, handleRecaptcha, captchaResult} = useContext(AuthContext)
 
+    const {
+        register,
+        formState: {errors},
+        handleSubmit,
+    } = useForm({
+        criteriaMode: "all"
+    });
+
     return (
         <ResetPasswdFormContainer>
-            <ResetPasswdTitle>Please enter your email to reset your password*</ResetPasswdTitle>
             <Form>
-                <form method='POST' onSubmit={resetPasswordUser}>
+                <ResetPasswdTitle>Please enter your email to reset password*</ResetPasswdTitle>
+                <form method='POST' onSubmit={handleSubmit(resetPasswordUser)}>
                     <label id="id_email">
-                        <Input type='email' name='email' placeholder='Your email' id='id_email' required/>
+                        <Input {...register('email', {
+                            required: "This input is required",
+                            maxLength: {
+                                value: 50,
+                                message: "Email cannot exceed 50 characters",
+                            },
+                            minLength: {
+                                value: 6,
+                                message: "Email must exceed 6 characters",
+                            },
+                        })} type='email' name='email' placeholder='Enter email' id='id_email' required/>
+                        <ErrorMessage
+                            errors={errors}
+                            name="email"
+                            render={({messages}) => {
+                                return messages
+                                    ? Object.entries(messages).map(([type, message]) => (
+                                        <InputError key={type}>{message}</InputError>
+                                    ))
+                                    : null;
+                            }}
+                        />
                     </label>
                     <ReCAPTCHA
                         sitekey="6LcSYlAfAAAAAKexdkjx7V90mymtCqUuJx-JOJZS"

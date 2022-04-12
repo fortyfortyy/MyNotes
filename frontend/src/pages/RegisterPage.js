@@ -18,8 +18,9 @@ import {
     Input,
     RegisterButton,
     DivButton,
-    P, I, Label, InputError
+    P, I, Label
 } from "./styles/RegisterPageStyles";
+import {InputError} from "../styles/application";
 
 
 const RegisterPage = () => {
@@ -41,10 +42,10 @@ const RegisterPage = () => {
 
     return (
         <RegisterFormContainer>
-            <RegisterTitle> Create your account </RegisterTitle>
 
             <RegisterForm>
                 <form method='POST' onSubmit={handleSubmit(registerUser)}>
+                <RegisterTitle> Create your account </RegisterTitle>
 
                     <label id="id_first_name">
                         <Input {...register('first_name', {
@@ -62,7 +63,6 @@ const RegisterPage = () => {
                             errors={errors}
                             name="first_name"
                             render={({messages}) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <InputError key={type}>{message}</InputError>
@@ -88,7 +88,6 @@ const RegisterPage = () => {
                             errors={errors}
                             name="email"
                             render={({messages}) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <InputError key={type}>{message}</InputError>
@@ -143,7 +142,6 @@ const RegisterPage = () => {
                             errors={errors}
                             name="password2"
                             render={({messages}) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <InputError key={type}>{message}</InputError>
@@ -162,7 +160,6 @@ const RegisterPage = () => {
                         {
                             captchaResult && <RegisterButton type="submit">Sign Up</RegisterButton>
                         }
-                        <RegisterButton type="submit">Sign Up</RegisterButton>
                         <Link to='/login'>
                             <P>
                                 <strong>Already </strong> have an account?

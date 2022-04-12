@@ -16,7 +16,7 @@ import {
     LoginButton,
     DivButton, P2
 } from "./styles/LoginPageStyles";
-import {InputError} from "./styles/RegisterPageStyles";
+import {InputError} from "../styles/application";
 
 
 const LoginPage = () => {
@@ -25,6 +25,7 @@ const LoginPage = () => {
     const {
         register,
         formState: {errors},
+        handleSubmit,
     } = useForm({
         criteriaMode: "all"
     });
@@ -32,10 +33,9 @@ const LoginPage = () => {
     return (
         <LoginFormContainer id="loginPage">
             <LoginInfo>You need to be logged in to be able using this app</LoginInfo>
-            <LoginTitle> Sign in to your account </LoginTitle>
-
             <LoginForm>
-                <form method='POST' onSubmit={loginUser}>
+                <LoginTitle> Sign in to your account </LoginTitle>
+                <form method='POST' onSubmit={handleSubmit(loginUser)}>
                     <label id="id_email">
                         <Input {...register('email', {
                             required: "This input is required",
@@ -52,7 +52,6 @@ const LoginPage = () => {
                             errors={errors}
                             name="email"
                             render={({messages}) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <InputError key={type}>{message}</InputError>
@@ -78,7 +77,6 @@ const LoginPage = () => {
                             errors={errors}
                             name="password"
                             render={({messages}) => {
-                                console.log("messages", messages);
                                 return messages
                                     ? Object.entries(messages).map(([type, message]) => (
                                         <InputError key={type}>{message}</InputError>
@@ -94,10 +92,9 @@ const LoginPage = () => {
                     />
 
                     <DivButton>
-                        {/*{*/}
-                        {/*    captchaResult && <LoginButton type="submit">Sign In</LoginButton>*/}
-                        {/*}*/}
-                        <LoginButton type="submit">Sign In</LoginButton>
+                        {
+                            captchaResult && <LoginButton type="submit">Sign In</LoginButton>
+                        }
                         <Link to='/reset/password'>
                             <P>Forgotten password?</P>
                         </Link>
