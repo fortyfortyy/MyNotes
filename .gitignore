@@ -1,5 +1,5 @@
 /venv
-/.env
+/mynotes/.env
 
 frontend/.yarn
 frontend/node_modules
@@ -7,3 +7,6 @@ frontend/.idea
 database
 .idea
 api/__pycache__/
+mynotes/__pycache__/
+users/__pycache__/
+__pycache__/
