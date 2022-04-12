@@ -1,8 +1,4 @@
-import os
 import requests
-
-from django.http import HttpResponse, HttpResponseNotFound
-from django.views import View
 
 from rest_framework import generics
 from rest_framework.decorators import api_view
