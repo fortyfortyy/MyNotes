@@ -6,11 +6,7 @@ export const Foooter = styled.footer`
     line-height: 1.42857143;
     font-size: 16px;
     text-align: center;
-    margin-top: 250px;
-    
-    @media screen and (max-width: 819px) {
-          margin-top: 100px;
-    }
+    padding-top: 60px;
 `;
 
 export const MainDiv = styled.div`
