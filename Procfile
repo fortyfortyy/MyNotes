@@ -1,3 +1,2 @@
-web: gunicorn mynotes.wsgi --log-file -
-heroku ps:resize web=hobby
-heroku certs:auto:enable
+release: python manage.py migrate
+web: gunicorn backend.wsgi --log-file -
