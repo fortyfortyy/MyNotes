@@ -7,31 +7,36 @@ export const RegisterFormContainer = styled.div`
     justify-items: center;
     margin: 0 auto;
     grid-gap: 1.5rem;
-    padding-top: 30px;
+    padding: 60px 0px;
+    
+    @media screen and (max-width: 768px) {
+       padding: 0px;
+    }
 `
 
 export const RegisterTitle = styled.div`
     transition: 1s ease;
     font-size: 22px;
-    padding: 20px 0;
+    color: #d6d1d1;
+    justify-self: center;
 `
 
 export const RegisterForm = styled.div`
     display: grid;
     font-size: 17px;
-    color: black;
     width: 90%;
+    padding: 0px;
     
     & form {
         display: grid;
-        grid-gap: 1.3rem;
         justify-items: center;
+        grid-gap: 2rem;
     }
     
     @media screen and (max-width: 768px) {
-        & form {
-            grid-gap: 1.5rem;
-        }
+       & form {
+          grid-gap: 1.3rem;
+       }
     }
 `
 
@@ -40,15 +45,14 @@ export const Input = styled.input`
     border-radius: 10px;
     font-size: 17px;
     padding: 10px 20px;
-     
+    color: black;
+    
     &:focus {
         outline: 0;
         border: 4px solid rgba(5, 67, 122, 1);  
     }   
       
     @media screen and (max-width: 768px) {
-       font-size: 15px;
-       
        &:focus {
            border: 3px solid rgba(67, 128, 255, 1); 
        }
@@ -60,10 +64,11 @@ export const DivButton = styled.div`
     max-width: 70%;
     margin: 30px 10px;
     grid-gap: 1rem;
+    color: #001528;
     
     @media screen and (max-width: 640px) {
        max-width: 100%;
-       margin: 30px 10px;
+       padding-bottom: 20px;   
     }
 `
 
@@ -107,7 +112,7 @@ export const RegisterButton = styled.button`
 
 export const I = styled.i`
     position: absolute;
-    top: 20%;
+    top: 22%;
     right: 10%;
     color: #05437a;
 
@@ -115,23 +120,13 @@ export const I = styled.i`
         color: #001528;
         cursor: pointer;
     }
+    
+    @media screen and (max-width: 768px) {
+       top: 26%;
+    }
+    
 `
-
 
 export const Label = styled.label`
     position: relative;
-`
-
-export const InputError = styled.p`
-    color: #bf1650;
-    font-size: 14px;
-    
-    &:before {
-        display: inline;
-        content: "⚠ ";
-    }
-    
-    @media screen and (max-width: 768px) {
-       font-size: 11px;
-    }
 `

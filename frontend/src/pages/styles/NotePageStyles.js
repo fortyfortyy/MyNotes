@@ -62,7 +62,7 @@ export const TextArea = styled.textarea`
   border: none;
   padding: 16px 12px;
   width: 100%;
-  height: 69.35vh;
+  height: 70vh;
   resize: none;
   scrollbar-width: none; /* Firefox */
   border-radius: 25px;

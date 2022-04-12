@@ -26,7 +26,7 @@ export const NotesCount = styled.p`
 export const NotesList = styled.div`
   padding: 0;
   margin: 16px 0;
-  height: 68vh;
+  height: 70vh;
   overflow-y: auto;
   scrollbar-width: none; 
   &:-webkit-scrollbar {

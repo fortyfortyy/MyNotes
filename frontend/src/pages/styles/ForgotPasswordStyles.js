@@ -6,7 +6,8 @@ export const ResetPasswdFormContainer = styled.div`
     width: 100%;
     justify-items: center;
     margin: 0 auto;
-    grid-gap: 5rem;
+    align-items: stretch;
+    padding-top: 30px;
     
     @media screen and (max-width: 768px) {
         grid-gap: 1rem;
@@ -18,12 +19,16 @@ export const ResetPasswdTitle = styled.div`
     transition: 1s ease;
     font-size: 22px;
     margin: 0 10px;
+    color: #d6d1d1;
+    padding: 20px 0px;
     
     @media screen and (max-width: 768px) {
        font-size: 20px;
-       padding-top: 50px;
-       padding-bottom: 50px;
        text-align: center;
+    }
+    
+    @media screen and (min-width: 1024px) {
+       padding: 0px;
     }
 `
 
@@ -33,10 +38,12 @@ export const Form = styled.div`
     color: black;
     width: 90%;
     justify-items: center;
+    align-items: center;
     
     & form {
         display: grid;
         justify-items: center;
+        grid-gap: 1rem;
     }
 `
 
@@ -66,12 +73,6 @@ export const Input = styled.input`
     &:focus {
         outline: 0;
         border: 4px solid rgba(5, 67, 122, 1);  
-    }
-    
-    @media screen and (max-width:  768px) {
-       padding: 10px 10px;
-       font-size: 15px;
-       margin-bottom: 10px;
     }
 `
 
