@@ -1,6 +1,7 @@
 /venv
+/.env
 /mynotes/.env
-
+/db.sqlite3
 frontend/.yarn
 frontend/node_modules
 frontend/.idea
@@ -10,3 +11,4 @@ api/__pycache__/
 mynotes/__pycache__/
 users/__pycache__/
 __pycache__/
+.pre-commit-config.yaml
