@@ -15,10 +15,11 @@ export const AddButtonS = styled.button`
   justify-content: center;
   cursor: pointer;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
-  transition: 0.3s ease;
+  transition: 0.3s ease
+  color: #001528;
   
   &: > svg {
-    fill: #1f2124;
+    fill: #f6f9fc;
   }
   
   &:hover {
@@ -28,8 +29,9 @@ export const AddButtonS = styled.button`
   }  
   
   @media screen and (max-width: 640px){
-      width: 50px;
-      height: 50px;
+    font-size: 40px;
+    width: 65px;
+    height: 65px;
   }
 `
 
