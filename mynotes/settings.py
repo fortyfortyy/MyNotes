@@ -13,8 +13,13 @@ import os
 from datetime import timedelta
 from pathlib import Path
 from django.conf import settings
-import environ
 
+# necessary libraries for deployment purposes
+import django_heroku
+import dotenv
+import dj_database_url
+
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -211,3 +216,5 @@ LOGOUT_REDIRECT_URL = "/"
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend',]
 
 RECAPTCHA = env('RECAPTCHA')
+
+django_heroku.settings(locals())
