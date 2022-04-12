@@ -21,19 +21,19 @@ export const AuthProvider = ({children}) => {
 
     const [captchaResult, setCaptchaResult] = useState()
 
+    const baseURL = 'http://192.168.0.8:8000'
 
     let registerUser = async (e) => {
-        e.preventDefault()
-        let response = await fetch('http://127.0.0.1:8000/account/api/register/', {
+        let response = await fetch(`${baseURL}/account/api/register/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                'first_name': e.target.first_name.value,
-                'email': e.target.email.value,
-                'password': e.target.password.value,
-                'password2': e.target.password2.value,
+                'first_name': e.first_name,
+                'email': e.email,
+                'password': e.password,
+                'password2': e.password2,
             })
         })
         await response.json()
@@ -87,13 +87,12 @@ export const AuthProvider = ({children}) => {
 
 
     let loginUser = async (e) => {
-        e.preventDefault()
-        let response = await fetch('http://127.0.0.1:8000/account/api/token/', {
+        let response = await fetch(`${baseURL}/account/api/token/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({'email': e.target.email.value, 'password': e.target.password.value})
+            body: JSON.stringify({'email': e.email, 'password': e.password})
         })
         let data = await response.json()
         if (response.status === 200) {
@@ -120,15 +119,13 @@ export const AuthProvider = ({children}) => {
 
 
     let resetPasswordUser = async (e) => {
-        e.preventDefault()
-        let response = await fetch('http://127.0.0.1:8000/account/reset/password/', {
+        let response = await fetch(`${baseURL}/account/reset/password/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({'email': e.target.email.value})
+            body: JSON.stringify({'email': e.email})
         })
-        await response.json()
         if (response.status === 200) {
             toast.success("Please check your email", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -140,20 +137,19 @@ export const AuthProvider = ({children}) => {
 
 
     let newUserPassword = async (e) => {
-        e.preventDefault()
         let url = window.location.pathname
         let url_split = url.split('/')
         let uid = url_split[4]
         let token = url_split[5]
 
-        let response = await fetch(`http://127.0.0.1:8000/account/set/password/${uid}/${token}/`, {
+        let response = await fetch(`${baseURL}/account/set/password/${uid}/${token}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                'password1': e.target.password1.value,
-                'password2': e.target.password2.value,
+                'password1': e.password1,
+                'password2': e.password2,
                 'uidb64': uid,
                 'token': token,
             })
@@ -177,7 +173,7 @@ export const AuthProvider = ({children}) => {
 
 
     let updateToken = async () => {
-        let response = await fetch('http://127.0.0.1:8000/account/api/token/refresh/', {
+        let response = await fetch(`${baseURL}/account/api/token/refresh/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -214,19 +210,21 @@ export const AuthProvider = ({children}) => {
         })
     }
 
-    let handleRecaptcha = (e) => {
-        fetch('http://127.0.0.1:8000/recaptcha/', {
+    let handleRecaptcha = async (e) => {
+        let response = await fetch(`${baseURL}/recaptcha/`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'captcha_value': e})
         })
-            .then(res => res.json())
-            .then(data => {
-                setCaptchaResult(data.captcha.success)
-            })
+        let data = await response.json()
+        if (response.status === 200) {
+            setCaptchaResult(data.captcha.success)
+        }
     }
 
     let contextData = {
+        setUser: setUser,
+        setAuthTokens: setAuthTokens,
         captchaResult: captchaResult,
         handleRecaptcha: handleRecaptcha,
         activateAccount: activateAccount,
