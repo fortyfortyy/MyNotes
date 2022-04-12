@@ -1,6 +1,8 @@
+import os
 import requests
 
-from mynotes import settings
+from django.http import HttpResponse, HttpResponseNotFound
+from django.views import View
 
 from rest_framework import generics
 from rest_framework.decorators import api_view
@@ -11,6 +13,7 @@ from api.serializers import NoteSerializer
 from api.models import Note
 
 from users.models import ProfileUser
+from mynotes import settings
 
 
 class NotesListView(generics.ListAPIView):
