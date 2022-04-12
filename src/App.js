@@ -1,5 +1,6 @@
 import React from "react";
 import {Route, Switch} from 'react-router-dom';
+import axios from 'axios';
 
 import './App.css';
 import {MainContainer} from "./styles/application";
@@ -24,6 +25,8 @@ import PageNotFound from "./components/PageNotFound/PageNotFoundStyles";
 
 
 const App = () => {
+    axios.defaults.xsrfCookieName = 'csrftoken'
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken'
     return (
         <MainContainer>
             <AuthProvider>
