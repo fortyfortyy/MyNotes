@@ -38,9 +38,12 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1', 'mysimplenotes.app', 'my-own-notes.herokuapp.com']
+ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8:8000', '127.0.0.1', 'mysimplenotes.app',
+                 'https://my-own-notes.herokuapp.com']
+
+# ALLOWED_HOSTS = ['*']
 PASSWORD_RESET_TIMEOUT = 120  # reset password token after 2 min
 
 # Application definition
@@ -100,7 +103,6 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 
@@ -197,7 +199,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'build/static',
 ]
@@ -220,9 +222,18 @@ LOGOUT_REDIRECT_URL = "/"
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend',]
 
 RECAPTCHA = env('RECAPTCHA')
+SECURE_SSL_REDIRECT=False
+SESSION_COOKIE_SECURE=False
+CSRF_COOKIE_SECURE=False
 
-# if not DEBUG:
-#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-#     SECURE_SSL_REDIRECT = True
+if not DEBUG:
+    # secure proxy SSL header and secure cookies
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+    # session expire at browser close
+    SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 django_heroku.settings(locals())
