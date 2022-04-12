@@ -36,7 +36,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['my-own-notes.herokuapp.com', '127.0.0.1:8000', 'localhost', '192.168.0.8']
+ALLOWED_HOSTS = ['www.mysimplenotes.app', '127.0.0.1:8000', 'localhost', '192.168.0.8']
 PASSWORD_RESET_TIMEOUT = 120  # reset password token after 2 min
 
 # Application definition
