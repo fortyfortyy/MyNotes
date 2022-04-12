@@ -7,13 +7,12 @@ export const Container = styled.div`
     padding-top: 2rem;
     align-items: center;
     justify-items: center;
-    padding-bottom: 100px;
+    padding-bottom: 0px;
+    grid-row-gap: 0.5rem;
  
     @media screen and (max-width: 640px) {
         font-size: 10px;
         grid-template-columns: repeat(2, 1fr);
-        grid-row-gap: 0.5rem;
-        padding-bottom: 50px;
     }
     
     @media screen and (min-width: 1021){
