@@ -12,3 +12,5 @@ mynotes/__pycache__/
 users/__pycache__/
 __pycache__/
 .pre-commit-config.yaml
+build/
+staticfiles
