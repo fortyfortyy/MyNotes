@@ -41,7 +41,7 @@ def send_welcome_user_mail(sender, instance, created, **kwargs):
     profile = instance
     if profile.is_active and hasattr(profile, '_sendwelcomemessage'):
 
-        subject = 'Welcome to MyNotes!'
+        subject = 'Welcome to MySimpleNotes!'
         message = render_to_string('emails/welcome_email.html', {
             'profile': profile,
         })
