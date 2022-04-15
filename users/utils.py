@@ -47,7 +47,7 @@ account_token = TokenGenerator()
 
 def send_reset_password_email(profile):
     current_domain = Site.objects.get_current().domain
-    subject = 'Reset your password at MyNotes'
+    subject = 'Reset your password at MySimpleNotes'
     message = render_to_string('users/password_reset_email.html', {
         'profile': profile,
         'domain': current_domain,
