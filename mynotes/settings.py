@@ -38,7 +38,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8:8000', '127.0.0.1', 'mysimplenotes.app',
                  'https://my-own-notes.herokuapp.com']
@@ -219,12 +219,13 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/login"
 LOGOUT_REDIRECT_URL = "/"
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend',]
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend', ]
 
 RECAPTCHA = env('RECAPTCHA')
-SECURE_SSL_REDIRECT=False
-SESSION_COOKIE_SECURE=False
-CSRF_COOKIE_SECURE=False
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 
 if not DEBUG:
     # secure proxy SSL header and secure cookies
