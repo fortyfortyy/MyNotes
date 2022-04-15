@@ -7,7 +7,7 @@ export const RegisterFormContainer = styled.div`
     justify-items: center;
     margin: 0 auto;
     grid-gap: 1.5rem;
-    padding: 60px 0px;
+    padding-top: 50px;
     
     @media screen and (max-width: 768px) {
        padding: 0px;
@@ -22,10 +22,9 @@ export const RegisterTitle = styled.div`
 `
 
 export const RegisterForm = styled.div`
-    display: grid;
     font-size: 17px;
     width: 90%;
-    padding: 0px;
+    padding-top: 17px;
     
     & form {
         display: grid;
@@ -35,7 +34,7 @@ export const RegisterForm = styled.div`
     
     @media screen and (max-width: 768px) {
        & form {
-          grid-gap: 1.3rem;
+          grid-gap: 1.42rem;
        }
     }
 `
@@ -62,13 +61,11 @@ export const Input = styled.input`
 export const DivButton = styled.div`
     display: grid;
     max-width: 70%;
-    margin: 30px 10px;
-    grid-gap: 1rem;
+    padding-top: 20px;
     color: #001528;
     
     @media screen and (max-width: 640px) {
-       max-width: 100%;
-       padding-bottom: 20px;   
+       font-size: 15px;
     }
 `
 
@@ -112,21 +109,29 @@ export const RegisterButton = styled.button`
 
 export const I = styled.i`
     position: absolute;
-    top: 22%;
-    right: 10%;
+    top: 40%;
+    right: 8%;
+    
     color: #05437a;
 
     :hover {
         color: #001528;
         cursor: pointer;
     }
-    
-    @media screen and (max-width: 768px) {
-       top: 26%;
-    }
-    
 `
 
 export const Label = styled.label`
     position: relative;
+    max-width: 500px;
+    display: grid;
+    justify-items: center;
+    padding-top: 10px;
+    
+    &:nth-child(1){
+        max-width: 300px;
+    }
+    
+    @media screen and (max-width: 768px) {
+        max-width: 300px;
+    }
 `

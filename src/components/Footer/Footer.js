@@ -13,6 +13,8 @@ const Footer = () => {
                     <FooterLink href="https://github.com/fortyfortyy"> Github </FooterLink>
                     <FooterLinkDiv/>
                     <FooterLink href="https://www.linkedin.com/in/daniel-pacek/"> LinkedIn </FooterLink>
+                    <FooterLinkDiv/>
+                    <FooterLink href="https://danielpacek.herokuapp.com/"> My Website </FooterLink>
 
                 </FooterLinksContainer>
 

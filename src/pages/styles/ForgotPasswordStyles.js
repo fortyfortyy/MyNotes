@@ -23,7 +23,7 @@ export const ResetPasswdTitle = styled.div`
     padding: 20px 0px;
     
     @media screen and (max-width: 768px) {
-       font-size: 20px;
+       font-size: 15px;
        text-align: center;
     }
     
@@ -39,11 +39,12 @@ export const Form = styled.div`
     width: 90%;
     justify-items: center;
     align-items: center;
+    grid-gap: 2.5rem;
     
     & form {
         display: grid;
         justify-items: center;
-        grid-gap: 1rem;
+        grid-gap: 2rem;
     }
 `
 
@@ -54,7 +55,7 @@ export const P = styled.p`
     text-align: center;
     
     @media screen and (max-width:  768px) {
-       margin-top: 60px;
+       padding-top: 40px;
     }
     
     @media screen and (min-width: 1024px) {
@@ -74,6 +75,10 @@ export const Input = styled.input`
         outline: 0;
         border: 4px solid rgba(5, 67, 122, 1);  
     }
+    
+    @media screen and (max-width: 640px) {
+       font-size: 15px;
+    }
 `
 
 export const DivButton = styled.div`
@@ -86,6 +91,7 @@ export const DivButton = styled.div`
     @media screen and (max-width: 640px) {
        max-width: 60%;
        margin: 20px 10px;
+       font-size: 15px;
     }
 `
 
@@ -102,5 +108,21 @@ export const ResetPasswdButton = styled.button`
     
     @media screen and (max-width: 640px) {
        padding: 10px 5px;
+    }
+`
+
+
+export const Label = styled.label`
+    position: relative;
+    max-width: 500px;
+    display: grid;
+    justify-items: center;
+    
+    &:nth-child(1){
+        max-width: 310px;
+    }
+    
+    @media screen and (max-width: 768px) {
+        max-width: 300px;
     }
 `
