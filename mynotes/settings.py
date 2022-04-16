@@ -17,16 +17,13 @@ from django.conf import settings
 # necessary libraries for deployment purposes
 import django_heroku
 import dj_database_url
-import mimetypes
-
 import environ
-
-mimetypes.add_type("text/javascript", ".js", True)
-mimetypes.add_type("text/css", ".css", True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+print('-----------BASE DIR-------------')
+print(BASE_DIR)
+print('------------------------')
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
