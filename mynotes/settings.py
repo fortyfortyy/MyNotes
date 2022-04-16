@@ -31,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
 if not DEBUG:
     print("PRODUCTION")
-    HEROKU = True
+    HEROKU = False
 else:
     print("DEVELOPMENT")
     HEROKU = False
