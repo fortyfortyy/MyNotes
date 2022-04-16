@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('users.urls')),
     path('api/', include('api.urls')),
-    path('', TemplateView.as_view(template_name='index.html'), name="home"),
+    path('.*', TemplateView.as_view(template_name='index.html'), name="home"),
     path('404', TemplateView.as_view(template_name='index.html'), name='error_page'),
     re_path('^.*$', handler404),
 ]
