@@ -25,6 +25,6 @@ urlpatterns = [
     path('api/', include('api.urls')),
     re_path('^.*$', TemplateView.as_view(template_name='index.html'), name="home"),
     path('404', TemplateView.as_view(template_name='index.html'), name='error_page'),
-    re_path('^.*$', handler404),
+    re_path('^.*$', view_404),
 ]
 handler404 = view_404
