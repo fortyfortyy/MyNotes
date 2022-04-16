@@ -216,8 +216,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_HOST = "https://my-own-notes.herokuapp.com/" if not DEBUG else "https://192.168.0.8/"
-STATIC_URL = STATIC_HOST + "/static/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / 'build/static',
 ]
@@ -230,20 +229,20 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
-CSRF_COOKIE_NAME = "csrftoken"
+# CORS_ALLOW_ALL_ORIGINS = True
+# CSRF_COOKIE_NAME = "csrftoken"
 WHITENOISE_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_HEADERS = [
-    "accept",
-    "accept-encoding",
-    "authorization",
-    "content-type",
-    "dnt",
-    "origin",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
-]
+# CORS_ALLOW_HEADERS = [
+#     "accept",
+#     "accept-encoding",
+#     "authorization",
+#     "content-type",
+#     "dnt",
+#     "origin",
+#     "user-agent",
+#     "x-csrftoken",
+#     "x-requested-with",
+# ]
 
 AUTH_USER_MODEL = 'users.ProfileUser'
 SITE_ID = 1
