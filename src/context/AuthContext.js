@@ -216,7 +216,7 @@ export const AuthProvider = ({children}) => {
     }
 
     let handleRecaptcha = async (e) => {
-        let response = await fetch(`${baseURL}/recaptcha/`, {
+        let response = await fetch(`${baseURL}/api/recaptcha/`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'captcha_value': e})

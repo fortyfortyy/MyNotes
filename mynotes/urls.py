@@ -16,12 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
-from django.conf import settings
 from django.conf.urls.static import static
+from django.conf import settings
+from mynotes.views import view_404
 
+
+handler404 = view_404
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('users.urls')),
-    path('', include('api.urls')),
-    re_path('.*', TemplateView.as_view(template_name='index.html'), name="home"),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('api/', include('api.urls')),
+    path('', TemplateView.as_view(template_name='index.html'), name="home"),
+    path('404', TemplateView.as_view(template_name='index.html'), name='error_page'),
+    re_path('^.*$', handler404),
+]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

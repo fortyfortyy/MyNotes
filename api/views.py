@@ -5,8 +5,10 @@ from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from api.mixins import NotAllowedGetMethodMixin
 from api.serializers import NoteSerializer
 from api.models import Note
+from api.utils import not_allowed_get_method
 
 from users.models import ProfileUser
 from mynotes import settings
@@ -25,7 +27,7 @@ class NotesListView(generics.ListAPIView):
         return Note.objects.filter(owner=user)
 
 
-class NoteCreateView(generics.CreateAPIView):
+class NoteCreateView(NotAllowedGetMethodMixin, generics.CreateAPIView):
     """
     Create a user's note
     """
@@ -38,7 +40,7 @@ class NoteCreateView(generics.CreateAPIView):
         serializer.save(owner=profile)
 
 
-class NoteListView(generics.RetrieveUpdateDestroyAPIView):
+class NoteListView(NotAllowedGetMethodMixin, generics.RetrieveUpdateDestroyAPIView):
     """
     Return a user's note
     """
@@ -53,14 +55,15 @@ class NoteListView(generics.RetrieveUpdateDestroyAPIView):
         return Note.objects.filter(owner=user)
 
 
+@not_allowed_get_method
 @api_view(['POST'])
 def recaptcha(request):
     r = requests.post(
-      'https://www.google.com/recaptcha/api/siteverify',
-      data={
-        'secret': settings.RECAPTCHA,
-        'response': request.data['captcha_value'],
-      }
+        'https://www.google.com/recaptcha/api/siteverify',
+        data={
+            'secret': settings.RECAPTCHA,
+            'response': request.data['captcha_value'],
+        }
     )
 
     return Response({'captcha': r.json()})

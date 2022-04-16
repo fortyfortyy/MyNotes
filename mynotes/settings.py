@@ -16,7 +16,6 @@ from django.conf import settings
 
 # necessary libraries for deployment purposes
 import django_heroku
-import dotenv
 import dj_database_url
 import mimetypes
 
@@ -31,23 +30,37 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# set varaibles for specific environment
 DEBUG = False
+if not DEBUG:
+    print("PRODUCTION")
+    HEROKU = True
+else:
+    print("DEVELOPMENT")
+    HEROKU = False
 
-ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8:8000', '127.0.0.1', 'mysimplenotes.app',
-                 'https://my-own-notes.herokuapp.com']
+if HEROKU:
+    BASE_URL = "https://my-own-notes.herokuapp.com/"
 
-# ALLOWED_HOSTS = ['*']
-PASSWORD_RESET_TIMEOUT = 120  # reset password token after 2 min
+    print("SETTING SSL SECURE REDIRECT")
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+else:
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_SSL_REDIRECT = False
 
-# Application definition
 
+ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1', 'mysimplenotes.app',
+                 'my-own-notes.herokuapp.com']
+
+
+PASSWORD_RESET_TIMEOUT = 300  # reset password token after 2 min
+
+# Apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -106,8 +119,8 @@ SIMPLE_JWT = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 
-    "corsheaders.middleware.CorsMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -118,6 +131,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mynotes.urls'
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend', ]
 
 TEMPLATES = [
     {
@@ -137,12 +151,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mynotes.wsgi.application'
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 if DEBUG:
+    print("DEVELOPMENT DATABASE")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -150,6 +162,7 @@ if DEBUG:
         }
     }
 else:
+    print("DEPLOYMENT DATABASE")
     DATABASES = {
         'default': {
             'DATABASE_URL': str(os.getenv('DATABASE_URL')),
@@ -160,6 +173,8 @@ else:
             'PORT': str(os.getenv('PORT')),
         }
     }
+
+WSGI_APPLICATION = 'mynotes.wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -199,12 +214,15 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_URL = 'static/'
+# https://docs.djangoproject.com/en/4.0/howto/static-files/
+
+STATIC_HOST = "https://my-own-notes.herokuapp.com" if not DEBUG else "https://192.168.0.8/"
+STATIC_URL = STATIC_HOST + "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / 'build/static',
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
@@ -213,39 +231,26 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOW_HEADERS = [
-#     "accept",
-#     "accept-encoding",
-#     "authorization",
-#     "content-type",
-#     "dnt",
-#     "origin",
-#     "user-agent",
-#     "x-csrftoken",
-#     "x-requested-with",
-# ]
+WHITENOISE_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 AUTH_USER_MODEL = 'users.ProfileUser'
 SITE_ID = 1
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/login"
 LOGOUT_REDIRECT_URL = "/"
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend', ]
 
 RECAPTCHA = env('RECAPTCHA')
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 
-if not DEBUG:
-    # secure proxy SSL header and secure cookies
-    SECURE_SSL_REDIRECT = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-
-    # session expire at browser close
-    SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-django_heroku.settings(locals())
+if HEROKU:
+    django_heroku.settings(locals())
