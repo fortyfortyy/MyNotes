@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
-from mynotes.views import view_404
+# from mynotes.views import view_404
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -24,7 +26,7 @@ urlpatterns = [
     path('account/', include('users.urls')),
     path('api/', include('api.urls')),
     re_path('^.*$', TemplateView.as_view(template_name='index.html'), name="home"),
-    path('404', TemplateView.as_view(template_name='index.html'), name='error_page'),
-    re_path('^.*$', view_404),
+    # path('404', TemplateView.as_view(template_name='index.html'), name='error_page'),
+    # re_path('^.*$', view_404),
 ]
-handler404 = view_404
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
