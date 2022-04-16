@@ -216,7 +216,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_HOST = "https://my-own-notes.herokuapp.com" if not DEBUG else "https://192.168.0.8/"
+STATIC_HOST = "https://my-own-notes.herokuapp.com/" if not DEBUG else "https://192.168.0.8/"
 STATIC_URL = STATIC_HOST + "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / 'build/static',
