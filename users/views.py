@@ -3,13 +3,13 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
-
-from rest_framework_simplejwt.views import TokenViewBase
+from rest_framework_simplejwt.views import TokenViewBase, TokenRefreshView
 from rest_framework_simplejwt.exceptions import AuthenticationFailed, InvalidToken, TokenError
 
 from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import smart_str
 
+from api.mixins import NotAllowedGetMethodMixin
 from users.utils import send_reset_password_email
 from users.utils import account_token
 from users.models import ProfileUser
@@ -17,7 +17,7 @@ from users.serializers import CustomTokenObtainPairSerializer, ForgottenPassword
     ChangePasswordSerializer, RegisterSerializer, InActiveUser
 
 
-class RegisterUserView(generics.CreateAPIView):
+class RegisterUserView(NotAllowedGetMethodMixin, generics.CreateAPIView):
     """
     Create new user account
     """
@@ -60,7 +60,7 @@ class ActivateAccountView(APIView):
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CustomTokenObtainPairView(TokenViewBase):
+class CustomTokenObtainPairView(NotAllowedGetMethodMixin, TokenViewBase):
     """
     Takes a set of user credentials and returns an access and refresh JSON web
     token pair to prove the authentication of those credentials.
@@ -81,7 +81,14 @@ class CustomTokenObtainPairView(TokenViewBase):
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
 
-class ForgottenPasswordView(generics.CreateAPIView):
+class CustomTokenRefreshView(NotAllowedGetMethodMixin, TokenRefreshView):
+    """
+    Refresh given old token with the new one
+    method get() is not allowed by mixin
+    """
+    pass
+
+class ForgottenPasswordView(NotAllowedGetMethodMixin, generics.CreateAPIView):
     """
     Search user by given email, then send reset link
     """
@@ -104,7 +111,7 @@ class ForgottenPasswordView(generics.CreateAPIView):
         return Response(serialized_form.data, status=status.HTTP_200_OK, headers=headers)
 
 
-class ChangePasswordView(generics.UpdateAPIView):
+class ChangePasswordView(NotAllowedGetMethodMixin, generics.UpdateAPIView):
     """
     Checks if token and uidb64 is valid for a specific user, then set the new passwd
     """
