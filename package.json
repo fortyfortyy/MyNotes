@@ -1,7 +1,7 @@
 {
   "name": "mynotes",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "my-own-notes.herokuapp.com/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -34,8 +34,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall": "npm run build",
-    "server": "json-server --watch db.json --port 8000"
+    "postinstall": "npm run build"
   },
   "eslintConfig": {
     "extends": [
