@@ -42,8 +42,6 @@ else:
     HEROKU = False
 
 if HEROKU:
-    BASE_URL = "https://my-own-notes.herokuapp.com"
-
     print("SETTING SSL SECURE REDIRECT")
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -229,7 +227,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 # CSRF_COOKIE_NAME = "csrftoken"
 WHITENOISE_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOW_HEADERS = [
