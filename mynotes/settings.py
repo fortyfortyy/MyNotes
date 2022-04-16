@@ -21,16 +21,14 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print('-----------BASE DIR-------------')
-print(BASE_DIR)
-print('------------------------')
+
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = env('SECRET_KEY')
 
 # set varaibles for specific environment
-DEBUG = False
+DEBUG = True
 if not DEBUG:
     print("PRODUCTION")
     HEROKU = True
@@ -215,7 +213,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'build/static',
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
@@ -223,7 +221,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_COOKIE_NAME = "csrftoken"
 CORS_ORIGIN_ALLOW_ALL = True
 
 AUTH_USER_MODEL = 'users.ProfileUser'
@@ -236,3 +233,5 @@ RECAPTCHA = env('RECAPTCHA')
 
 if HEROKU:
     django_heroku.settings(locals())
+    options = DATABASES['default'].get('OPTIONS', {})
+    options.pop('sslmode', None)
