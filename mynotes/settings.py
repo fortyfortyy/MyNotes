@@ -52,9 +52,10 @@ else:
     SECURE_SSL_REDIRECT = False
 
 
-ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1', 'mysimplenotes.app',
-                 'my-own-notes.herokuapp.com', 'https://my-own-notes.herokuapp.com']
+# ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1', 'mysimplenotes.app',
+#                  'my-own-notes.herokuapp.com', 'https://my-own-notes.herokuapp.com']
 
+ALLOWED_HOSTS = ['*']
 
 PASSWORD_RESET_TIMEOUT = 300  # reset password token after 2 min
 
@@ -134,9 +135,7 @@ AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBacke
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / 'build',
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -227,20 +226,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-WHITENOISE_ALLOW_ALL_ORIGINS = True
 CSRF_COOKIE_NAME = "csrftoken"
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_HEADERS = [
-    "accept",
-    "accept-encoding",
-    "authorization",
-    "content-type",
-    "dnt",
-    "origin",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
-]
+CORS_ORIGIN_ALLOW_ALL = True
 
 AUTH_USER_MODEL = 'users.ProfileUser'
 SITE_ID = 1
