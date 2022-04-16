@@ -53,7 +53,7 @@ else:
 
 
 ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1', 'mysimplenotes.app',
-                 'my-own-notes.herokuapp.com']
+                 'https://my-own-notes.herokuapp.com']
 
 
 PASSWORD_RESET_TIMEOUT = 300  # reset password token after 2 min
