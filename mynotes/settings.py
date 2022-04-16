@@ -53,7 +53,7 @@ else:
 
 
 ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1', 'mysimplenotes.app',
-                 'my-own-notes.herokuapp.com']
+                 'my-own-notes.herokuapp.com', 'https://my-own-notes.herokuapp.com']
 
 
 PASSWORD_RESET_TIMEOUT = 300  # reset password token after 2 min
@@ -230,17 +230,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 # CSRF_COOKIE_NAME = "csrftoken"
 WHITENOISE_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_HEADERS = [
-    "accept",
-    "accept-encoding",
-    "authorization",
-    "content-type",
-    "dnt",
-    "origin",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
-]
+# CORS_ALLOW_HEADERS = [
+#     "accept",
+#     "accept-encoding",
+#     "authorization",
+#     "content-type",
+#     "dnt",
+#     "origin",
+#     "user-agent",
+#     "x-csrftoken",
+#     "x-requested-with",
+# ]
 
 AUTH_USER_MODEL = 'users.ProfileUser'
 SITE_ID = 1
