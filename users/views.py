@@ -9,7 +9,7 @@ from rest_framework_simplejwt.exceptions import AuthenticationFailed, InvalidTok
 from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import smart_str
 
-# from api.mixins import NotAllowedGetMethodMixin
+from api.mixins import NotAllowedGetMethodMixin
 from users.utils import send_reset_password_email
 from users.utils import account_token
 from users.models import ProfileUser
@@ -60,7 +60,7 @@ class ActivateAccountView(APIView):
         return Response(content, status=status.HTTP_400_BAD_REQUEST, content_type='application/javascript')
 
 
-class CustomTokenObtainPairView(TokenViewBase):
+class CustomTokenObtainPairView(NotAllowedGetMethodMixin, TokenViewBase):
     """
     Takes a set of user credentials and returns an access and refresh JSON web
     token pair to prove the authentication of those credentials.
