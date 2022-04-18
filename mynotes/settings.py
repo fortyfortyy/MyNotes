@@ -28,7 +28,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # set varaibles for specific environment
-DEBUG = True
+DEBUG = False
 if not DEBUG:
     print("PRODUCTION")
     HEROKU = True
@@ -38,9 +38,9 @@ else:
 
 if HEROKU:
     print("SETTING SSL SECURE REDIRECT")
-    # SESSION_COOKIE_SECURE = True
-    # CSRF_COOKIE_SECURE = True
-    # SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
 else:
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
