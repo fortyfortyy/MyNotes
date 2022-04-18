@@ -28,7 +28,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # set varaibles for specific environment
-DEBUG = False
+DEBUG = True
 if not DEBUG:
     print("PRODUCTION")
     HEROKU = True
@@ -111,9 +111,8 @@ SIMPLE_JWT = {
 }
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -208,11 +207,13 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    BASE_DIR / 'build/static',
+    os.path.join(BASE_DIR, 'build/static'),
+    # BASE_DIR / 'build/static',
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Default primary key field type

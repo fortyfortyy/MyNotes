@@ -12,7 +12,7 @@ const NotePage = ({match, history}) => {
     let [note, setNote] = useState(null) // before adding things, note will be null
     let {authTokens} = useContext(AuthContext)
 
-    let baseURL = 'https://my-own-notes.herokuapp.com'
+    let baseURL = 'http://192.168.0.8:8000'
 
     useEffect(() => {
         getNote();
