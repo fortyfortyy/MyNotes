@@ -31,13 +31,13 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # set varaibles for specific environment
-DEBUG = True
-# if not DEBUG:
-#     print("PRODUCTION")
-#     HEROKU = True
-# else:
-print("DEVELOPMENT")
-HEROKU = True
+DEBUG = False
+if not DEBUG:
+    print("PRODUCTION")
+    HEROKU = True
+else:
+    print("DEVELOPMENT")
+    HEROKU = True
 
 if HEROKU:
     print("SETTING SSL SECURE REDIRECT")
@@ -214,7 +214,7 @@ STATICFILES_DIRS = [
     # BASE_DIR / 'build/static',
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ALLOW_ALL_ORIGINS = True
