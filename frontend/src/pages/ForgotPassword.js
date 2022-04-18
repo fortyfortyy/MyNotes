@@ -11,6 +11,7 @@ import {
     Form,
     ResetPasswdTitle,
     P,
+    Label,
 } from "./styles/ForgotPasswordStyles";
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from "@hookform/error-message";
@@ -33,17 +34,17 @@ const ForgotPassword = () => {
             <Form>
                 <ResetPasswdTitle>Please enter your email to reset password*</ResetPasswdTitle>
                 <form method='POST' onSubmit={handleSubmit(resetPasswordUser)}>
-                    <label id="id_email">
+                    <Label id="id_email">
                         <Input {...register('email', {
                             required: "This input is required",
                             maxLength: {
                                 value: 50,
                                 message: "Email cannot exceed 50 characters",
                             },
-                            minLength: {
-                                value: 6,
-                                message: "Email must exceed 6 characters",
-                            },
+                            pattern: {
+                                value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                message: "Invalid email, please enter the correct one",
+                            }
                         })} type='email' name='email' placeholder='Enter email' id='id_email' required/>
                         <ErrorMessage
                             errors={errors}
@@ -56,7 +57,7 @@ const ForgotPassword = () => {
                                     : null;
                             }}
                         />
-                    </label>
+                    </Label>
                     <ReCAPTCHA
                         sitekey="6LcSYlAfAAAAAKexdkjx7V90mymtCqUuJx-JOJZS"
                         onChange={handleRecaptcha}

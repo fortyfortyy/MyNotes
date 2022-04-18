@@ -35,9 +35,9 @@ const App = () => {
                 <Switch>
                     <Route exact path='/login' component={LoginPage}/>
                     <Route exact path='/register' component={RegisterPage}/>
-                    <Route exact path='/reset/password/' component={ForgotPassword}/>
-                    <Route exact path='/account/set/password/:uid/:token/' component={ResetPassword}/>
-                    <Route exact path='/account/activate/:uid/:token/' component={ActivateAccount}/>
+                    <Route exact path='/reset/password' component={ForgotPassword}/>
+                    <Route exact path='/set/password/:uid/:token' component={ResetPassword}/>
+                    <Route exact path='/activate/:uid/:token' component={ActivateAccount}/>
 
                     <PrivateRoute exact path='/' component={NotesListPage}/>
                     <PrivateRoute exact path='/notes/:id' component={NotePage}/>

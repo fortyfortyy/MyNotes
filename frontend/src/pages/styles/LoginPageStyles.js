@@ -84,6 +84,7 @@ export const Input = styled.input`
     }
     
     @media screen and (max-width:  768px) {
+       font-size: 15px;
        &:focus {
             border: 3px solid rgba(67, 128, 255, 1); 
        }
@@ -105,8 +106,7 @@ export const DivButton = styled.div`
     
     @media screen and (max-width: 640px) {
        grid-gap: 0;
-       max-width: 100%;
-       padding-bottom: 20px;       
+       max-width: 100%;     
     }
 `
 
