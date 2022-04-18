@@ -39,7 +39,7 @@ class ActivateAccountView(APIView):
     renderer_classes = [JSONRenderer]
 
     def get(self, request, *args, **kwargs):
-        return render(request, '../../public/index.html')
+        return render(request, 'index.html')
 
     def post(self, request, *args, **kwargs):
         try:
@@ -75,7 +75,7 @@ class CustomTokenObtainPairView(TokenViewBase):
     serializer_class = CustomTokenObtainPairSerializer
 
     def get(self, request, *args, **kwargs):
-        return render(request, '../../public/index.html')
+        return render(request, 'index.html')
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -96,7 +96,7 @@ class CustomTokenRefreshView(TokenRefreshView):
     """
 
     def get(self, request, *args, **kwargs):
-        return render(request, '../../public/index.html')
+        return render(request, 'index.html')
 
 
 class ForgottenPasswordView(generics.CreateAPIView):
@@ -134,7 +134,7 @@ class ChangePasswordView(generics.UpdateAPIView):
     serializer_class = ChangePasswordSerializer
 
     def get(self, request, *args, **kwargs):
-        return render(request, '../../public/index.html')
+        return render(request, 'index.html')
 
     def get_user(self, uidb64=None, queryset=None):
         try:
