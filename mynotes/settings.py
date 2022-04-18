@@ -36,6 +36,7 @@ else:
     print("DEVELOPMENT")
     HEROKU = False
 
+
 if HEROKU:
     print("SETTING SSL SECURE REDIRECT")
     SESSION_COOKIE_SECURE = True
