@@ -39,10 +39,9 @@ class ActivateAccountView(APIView):
     renderer_classes = [JSONRenderer]
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'users/index.html')
+        return render(request, '../../public/index.html')
 
     def post(self, request, *args, **kwargs):
-        breakpoint()
         try:
             uid = smart_str(urlsafe_base64_decode(kwargs['uidb64']))
             profile = self.model.objects.get(pk=uid)
@@ -76,8 +75,7 @@ class CustomTokenObtainPairView(TokenViewBase):
     serializer_class = CustomTokenObtainPairSerializer
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'users/index.html')
-
+        return render(request, '../../public/index.html')
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -91,12 +89,15 @@ class CustomTokenObtainPairView(TokenViewBase):
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
 
-class CustomTokenRefreshView(NotAllowedGetMethodMixin, TokenRefreshView):
+class CustomTokenRefreshView(TokenRefreshView):
     """
     Refresh given old token with the new one
     method get() is not allowed by mixin
     """
-    pass
+
+    def get(self, request, *args, **kwargs):
+        return render(request, '../../public/index.html')
+
 
 class ForgottenPasswordView(generics.CreateAPIView):
     """
@@ -106,7 +107,7 @@ class ForgottenPasswordView(generics.CreateAPIView):
     model = ProfileUser
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'users/index.html')
+        return render(request, '../../public/index.html')
 
     def post(self, request, *args, **kwargs):
         serialized_form = self.get_serializer(data=request.data)
@@ -133,7 +134,7 @@ class ChangePasswordView(generics.UpdateAPIView):
     serializer_class = ChangePasswordSerializer
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'users/index.html')
+        return render(request, '../../public/index.html')
 
     def get_user(self, uidb64=None, queryset=None):
         try:

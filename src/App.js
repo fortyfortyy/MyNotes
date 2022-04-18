@@ -36,8 +36,8 @@ const App = () => {
                     <Route path='/login' component={LoginPage}/>
                     <Route path='/register' component={RegisterPage}/>
                     <Route path='/reset/password' component={ForgotPassword}/>
-                    <Route path='/set/password/:uid/:token' component={ResetPassword}/>
-                    <Route path='/activate/:uid/:token' component={ActivateAccount}/>
+                    <Route path='/account/set/password/:uid/:token' component={ResetPassword}/>
+                    <Route path='/account/activate/:uid/:token' component={ActivateAccount}/>
 
                     <PrivateRoute exact path='/' component={NotesListPage}/>
                     <PrivateRoute exact path='/notes/:id' component={NotePage}/>
