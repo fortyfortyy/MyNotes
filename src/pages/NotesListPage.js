@@ -20,24 +20,10 @@ const NotesListPage = () => {
     }, []);
 
     let getNotes = async () => {
-        // let response = await fetch('http://localhost:8000/notes/', {
-        //     method: 'GET',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Authorization': 'Bearer ' + String(authTokens.access)
-        //     }
-        // })
-        // let data = await response.json()
-
         let response = await api.get('/api/notes/')
         if (response.status === 200) {
             setNotes(response.data)
         }
-        // if (response.status === 200) {
-        //     setNotes(response.data)
-        // } else if (response.statusText === 'Unauthorized') {
-        //     logoutUser()
-        // }
     }
 
     return (

@@ -39,7 +39,7 @@ class NoteCreateView(NotAllowedGetMethodMixin, generics.CreateAPIView):
         serializer.save(owner=profile)
 
 
-class NoteListView(NotAllowedGetMethodMixin, generics.RetrieveUpdateDestroyAPIView):
+class NoteListView(generics.RetrieveUpdateDestroyAPIView):
     """
     Return a user's note
     """

@@ -31,13 +31,13 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # set varaibles for specific environment
-DEBUG = False
+DEBUG = True
 if not DEBUG:
     print("PRODUCTION")
     HEROKU = True
 else:
     print("DEVELOPMENT")
-    HEROKU = True
+    HEROKU = False
 
 if HEROKU:
     print("SETTING SSL SECURE REDIRECT")
