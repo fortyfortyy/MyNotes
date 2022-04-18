@@ -8,7 +8,6 @@ from rest_framework.response import Response
 from api.mixins import NotAllowedGetMethodMixin
 from api.serializers import NoteSerializer
 from api.models import Note
-from api.utils import not_allowed_get_method
 
 from users.models import ProfileUser
 from mynotes import settings

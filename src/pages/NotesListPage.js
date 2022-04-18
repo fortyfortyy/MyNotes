@@ -29,7 +29,7 @@ const NotesListPage = () => {
         // })
         // let data = await response.json()
 
-        let response = await api.get('/notes/')
+        let response = await api.get('/api/notes/')
         if (response.status === 200) {
             setNotes(response.data)
         }
