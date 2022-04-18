@@ -24,8 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('users.urls')),
     path('api/', include('api.urls')),
-    path('', TemplateView.as_view(template_name='index.html'), name="home"),
+    re_path('.*', TemplateView.as_view(template_name='index.html'), name="home"),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-handler404 = 'mynotes.views.view_404'
+# handler404 = 'mynotes.views.view_404'

@@ -43,7 +43,6 @@ const App = () => {
                     <PrivateRoute exact path='/notes/:id' component={NotePage}/>
 
                     <Route component={PageNotFound}/>
-                    <Route path='/404' component={PageNotFound}/>
                 </Switch>
 
                 <Footer/>
