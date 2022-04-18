@@ -54,10 +54,10 @@ class ActivateAccountView(APIView):
             finally:
                 del profile._sendwelcomemessage
 
-            return Response({'account': 'Account has been activated!'}, status=status.HTTP_200_OK)
+            return Response({'account': 'Account has been activated!'}, status=status.HTTP_200_OK, content_type='application/javascript')
 
         content = {'account': 'Your link is invalid or your account is already activated'}
-        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+        return Response(content, status=status.HTTP_400_BAD_REQUEST, content_type='application/javascript')
 
 
 class CustomTokenObtainPairView(NotAllowedGetMethodMixin, TokenViewBase):
@@ -108,7 +108,7 @@ class ForgottenPasswordView(NotAllowedGetMethodMixin, generics.CreateAPIView):
                 send_reset_password_email(profile)
 
         headers = self.get_success_headers(serialized_form.data)
-        return Response(serialized_form.data, status=status.HTTP_200_OK, headers=headers)
+        return Response(serialized_form.data, status=status.HTTP_200_OK, headers=headers, content_type='application/javascript')
 
 
 class ChangePasswordView(NotAllowedGetMethodMixin, generics.UpdateAPIView):
@@ -142,12 +142,12 @@ class ChangePasswordView(NotAllowedGetMethodMixin, generics.UpdateAPIView):
     def update(self, request, *args, **kwargs):
         user = self.get_object()
         if user is None:
-            return Response({"User": "Invalid token or uidb"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"User": "Invalid token or uidb"}, status=status.HTTP_400_BAD_REQUEST, content_type='application/javascript')
 
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             user.set_password(serializer.data.get('password1'))
             user.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK, content_type='application/javascript')
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST, content_type='application/javascript')
