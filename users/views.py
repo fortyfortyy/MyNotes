@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from rest_framework import generics, permissions
 from rest_framework import status
 from rest_framework.response import Response
@@ -37,6 +39,10 @@ class ActivateAccountView(APIView):
     renderer_classes = [JSONRenderer]
 
     def get(self, request, *args, **kwargs):
+        return render(request, 'users/index.html')
+
+    def post(self, request, *args, **kwargs):
+        breakpoint()
         try:
             uid = smart_str(urlsafe_base64_decode(kwargs['uidb64']))
             profile = self.model.objects.get(pk=uid)
@@ -60,7 +66,7 @@ class ActivateAccountView(APIView):
         return Response(content, status=status.HTTP_400_BAD_REQUEST, content_type='application/javascript')
 
 
-class CustomTokenObtainPairView(NotAllowedGetMethodMixin, TokenViewBase):
+class CustomTokenObtainPairView(TokenViewBase):
     """
     Takes a set of user credentials and returns an access and refresh JSON web
     token pair to prove the authentication of those credentials.
@@ -68,6 +74,10 @@ class CustomTokenObtainPairView(NotAllowedGetMethodMixin, TokenViewBase):
     Returns HTTP 406 when user is inactive and HTTP 401 when login credentials are invalid.
     """
     serializer_class = CustomTokenObtainPairSerializer
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'users/index.html')
+
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -81,7 +91,7 @@ class CustomTokenObtainPairView(NotAllowedGetMethodMixin, TokenViewBase):
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
 
-class CustomTokenRefreshView(TokenRefreshView):
+class CustomTokenRefreshView(NotAllowedGetMethodMixin, TokenRefreshView):
     """
     Refresh given old token with the new one
     method get() is not allowed by mixin
@@ -94,6 +104,9 @@ class ForgottenPasswordView(generics.CreateAPIView):
     """
     serializer_class = ForgottenPasswordSerializer
     model = ProfileUser
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'users/index.html')
 
     def post(self, request, *args, **kwargs):
         serialized_form = self.get_serializer(data=request.data)
@@ -118,6 +131,9 @@ class ChangePasswordView(generics.UpdateAPIView):
     queryset = ProfileUser
     token_generator = account_token
     serializer_class = ChangePasswordSerializer
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'users/index.html')
 
     def get_user(self, uidb64=None, queryset=None):
         try:
