@@ -9,7 +9,7 @@ from rest_framework_simplejwt.exceptions import AuthenticationFailed, InvalidTok
 from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import smart_str
 
-from api.mixins import NotAllowedGetMethodMixin
+# from api.mixins import NotAllowedGetMethodMixin
 from users.utils import send_reset_password_email
 from users.utils import account_token
 from users.models import ProfileUser
@@ -17,7 +17,7 @@ from users.serializers import CustomTokenObtainPairSerializer, ForgottenPassword
     ChangePasswordSerializer, RegisterSerializer, InActiveUser
 
 
-class RegisterUserView(NotAllowedGetMethodMixin, generics.CreateAPIView):
+class RegisterUserView(generics.CreateAPIView):
     """
     Create new user account
     """
@@ -60,7 +60,7 @@ class ActivateAccountView(APIView):
         return Response(content, status=status.HTTP_400_BAD_REQUEST, content_type='application/javascript')
 
 
-class CustomTokenObtainPairView(NotAllowedGetMethodMixin, TokenViewBase):
+class CustomTokenObtainPairView(TokenViewBase):
     """
     Takes a set of user credentials and returns an access and refresh JSON web
     token pair to prove the authentication of those credentials.
@@ -81,14 +81,14 @@ class CustomTokenObtainPairView(NotAllowedGetMethodMixin, TokenViewBase):
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
 
-class CustomTokenRefreshView(NotAllowedGetMethodMixin, TokenRefreshView):
+class CustomTokenRefreshView(TokenRefreshView):
     """
     Refresh given old token with the new one
     method get() is not allowed by mixin
     """
     pass
 
-class ForgottenPasswordView(NotAllowedGetMethodMixin, generics.CreateAPIView):
+class ForgottenPasswordView(generics.CreateAPIView):
     """
     Search user by given email, then send reset link
     """
@@ -111,7 +111,7 @@ class ForgottenPasswordView(NotAllowedGetMethodMixin, generics.CreateAPIView):
         return Response(serialized_form.data, status=status.HTTP_200_OK, headers=headers, content_type='application/javascript')
 
 
-class ChangePasswordView(NotAllowedGetMethodMixin, generics.UpdateAPIView):
+class ChangePasswordView(generics.UpdateAPIView):
     """
     Checks if token and uidb64 is valid for a specific user, then set the new passwd
     """
