@@ -41,18 +41,18 @@ else:
 
 if HEROKU:
     print("SETTING SSL SECURE REDIRECT")
-    # SESSION_COOKIE_SECURE = True
-    # CSRF_COOKIE_SECURE = True
-    # SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
 else:
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
     SECURE_SSL_REDIRECT = False
 
-# ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1', 'mysimplenotes.app',
-#                  'my-own-notes.herokuapp.com', 'https://my-own-notes.herokuapp.com']
+ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1', 'mysimplenotes.app',
+                 'my-own-notes.herokuapp.com', 'https://my-own-notes.herokuapp.com']
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 PASSWORD_RESET_TIMEOUT = 300  # reset password token after 2 min
 
@@ -212,7 +212,6 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static'),
-    # BASE_DIR / 'build/static',
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -225,9 +224,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.ProfileUser'
 SITE_ID = 1
-LOGIN_REDIRECT_URL = "/"
-LOGIN_URL = "/login"
-LOGOUT_REDIRECT_URL = "/"
+# LOGIN_REDIRECT_URL = "/"
+# LOGIN_URL = "/login"
+# LOGOUT_REDIRECT_URL = "/"
 
 RECAPTCHA = env('RECAPTCHA')
 

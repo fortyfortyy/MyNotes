@@ -8,8 +8,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib.sites.models import Site
-# ---
-import time
+
 #generate token
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 # ---
