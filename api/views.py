@@ -55,7 +55,6 @@ class NoteListView(NotAllowedGetMethodMixin, generics.RetrieveUpdateDestroyAPIVi
         return Note.objects.filter(owner=user)
 
 
-@not_allowed_get_method
 @api_view(['POST'])
 def recaptcha(request):
     r = requests.post(

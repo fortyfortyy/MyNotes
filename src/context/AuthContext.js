@@ -224,6 +224,8 @@ export const AuthProvider = ({children}) => {
         let data = await response.json()
         if (response.status === 200) {
             setCaptchaResult(data.captcha.success)
+        } else {
+            console.log(response)
         }
     }
 
