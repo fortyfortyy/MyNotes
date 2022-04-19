@@ -60,8 +60,8 @@ export const AuthProvider = ({children}) => {
         e.preventDefault()
         let url = window.location.hash
         let url_split = url.split('/')
-        let uid = url_split[2]
-        let token = url_split[3]
+        let uid = url_split[3]
+        let token = url_split[4]
 
         let response = await fetch(`${baseURL}/account/activate/${uid}/${token}/`, {
             method: 'POST',
