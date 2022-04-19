@@ -137,7 +137,7 @@ class ChangePasswordView(generics.UpdateAPIView):
     serializer_class = ChangePasswordSerializer
 
     def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect(f"/#/set/password/{kwargs['uidb64']}/{kwargs['token']}/")
+        return HttpResponseRedirect(f"/#/account/set/password/{kwargs['uidb64']}/{kwargs['token']}/")
 
     def get_user(self, uidb64=None, queryset=None):
         try:
