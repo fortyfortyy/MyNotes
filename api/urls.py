@@ -8,3 +8,4 @@ urlpatterns = [
     path('notes/<uuid:note_uuid>/', NoteListView.as_view(), name='note-view'),
     path('recaptcha/', recaptcha, name='recaptcha'),
 ]
+handler404 = 'mynotes.views.view_404'
