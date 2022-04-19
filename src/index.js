@@ -7,7 +7,7 @@ import {ToastContainer} from "react-toastify";
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router basename="/static">
+        <Router>
             <ToastContainer style={{top: '50px'}}/>
             <App/>
         </Router>
