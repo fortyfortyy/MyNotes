@@ -64,10 +64,14 @@ export const AuthProvider = ({children}) => {
         let token = url_split[5]
 
         let response = await fetch(`${baseURL}/account/activate/${uid}/${token}/`, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+                'uidb64': uid,
+                'token': token,
+            })
         })
         let data = await response.json()
         if (response.status === 200) {

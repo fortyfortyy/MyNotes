@@ -44,12 +44,12 @@ class ActivateAccountView(APIView):
 
     def post(self, request, *args, **kwargs):
         try:
-            uid = smart_str(urlsafe_base64_decode(kwargs['uidb64']))
+            uid = smart_str(urlsafe_base64_decode(request.data.get('uidb64', None)))
             profile = self.model.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, KeyError, self.model.DoesNotExist):
             profile = None
 
-        if profile is not None and account_token.check_token(profile, kwargs['token']):
+        if profile is not None and account_token.check_token(profile, request.data.get('token', None)):
             profile.is_active = True
 
             # Create temporary attribute to send welcome message
