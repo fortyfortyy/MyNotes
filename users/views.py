@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from rest_framework import generics, permissions
 from rest_framework import status
@@ -39,7 +39,7 @@ class ActivateAccountView(APIView):
     renderer_classes = [JSONRenderer]
 
     def get(self, request, *args, **kwargs):
-        return redirect('home')
+        return HttpResponseRedirect(f"/account/activate/<token>/<uuuid>/")
 
     def post(self, request, *args, **kwargs):
         try:
