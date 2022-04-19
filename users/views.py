@@ -39,7 +39,7 @@ class ActivateAccountView(APIView):
     renderer_classes = [JSONRenderer]
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
+        return redirect('home')
 
     def post(self, request, *args, **kwargs):
         try:
