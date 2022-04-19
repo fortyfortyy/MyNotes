@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 
 import './App.css';
@@ -42,8 +42,8 @@ const App = () => {
                     <PrivateRoute exact path='/' component={NotesListPage}/>
                     <PrivateRoute exact path='/notes/:id' component={NotePage}/>
 
-                    <Route component={PageNotFound}/>
-                    <Route path="/404" component={PageNotFound}/>
+                    <Route path='/404' component={PageNotFound}/>
+                    <Redirect to="/404" />
                 </Switch>
 
                 <Footer/>
