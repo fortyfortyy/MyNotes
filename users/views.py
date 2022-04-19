@@ -29,6 +29,8 @@ class RegisterUserView(generics.CreateAPIView):
     ]
     serializer_class = RegisterSerializer
 
+    def get(self, request, *args, **kwargs):
+        return HttpResponseRedirect('/#/register')
 
 class ActivateAccountView(APIView):
     """
@@ -39,7 +41,7 @@ class ActivateAccountView(APIView):
     renderer_classes = [JSONRenderer]
 
     def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect(f"/account/activate/{kwargs['uidb64']}/{kwargs['token']}/")
+        return HttpResponseRedirect(f"/#/account/activate/{kwargs['uidb64']}/{kwargs['token']}/")
 
     def post(self, request, *args, **kwargs):
         try:
@@ -75,7 +77,7 @@ class CustomTokenObtainPairView(TokenViewBase):
     serializer_class = CustomTokenObtainPairSerializer
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
+        return HttpResponseRedirect('/#')
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -96,7 +98,7 @@ class CustomTokenRefreshView(TokenRefreshView):
     """
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
+        return HttpResponseRedirect('/#')
 
 
 class ForgottenPasswordView(generics.CreateAPIView):
@@ -107,7 +109,7 @@ class ForgottenPasswordView(generics.CreateAPIView):
     model = ProfileUser
 
     def get(self, request, *args, **kwargs):
-        return render(request, '../../public/index.html')
+        return HttpResponseRedirect('/#')
 
     def post(self, request, *args, **kwargs):
         serialized_form = self.get_serializer(data=request.data)
@@ -134,7 +136,7 @@ class ChangePasswordView(generics.UpdateAPIView):
     serializer_class = ChangePasswordSerializer
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
+        return HttpResponseRedirect('/#')
 
     def get_user(self, uidb64=None, queryset=None):
         try:
