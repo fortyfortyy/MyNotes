@@ -39,7 +39,7 @@ class ActivateAccountView(APIView):
     renderer_classes = [JSONRenderer]
 
     def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect(f"/account/activate/<token>/<uuuid>/")
+        return HttpResponseRedirect(f"/account/activate/{kwargs['uidb64']}/{kwargs['token']}/")
 
     def post(self, request, *args, **kwargs):
         try:
