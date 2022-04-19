@@ -2,7 +2,7 @@
     Hi {{ profile.first_name }}!
     The MyNotes request you confirm your account. Please click the link below:
 
-    https://{{ domain }}{% url 'activate_account' uidb64=uid token=token %}
+    {{ domain }}{% url 'activate_account' uidb64=uid token=token %}
 
     Best,
     The MySimpleNotes Team
