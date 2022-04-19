@@ -154,6 +154,7 @@ class ChangePasswordView(generics.UpdateAPIView):
         if user is not None:
             token = self.kwargs['token']
             if self.token_generator.check_token(user=user, token=token):
+                # TODO usunąc token z bazy danych zeby nie był ważny
                 return user
 
             user = None
