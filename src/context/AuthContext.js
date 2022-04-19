@@ -60,8 +60,8 @@ export const AuthProvider = ({children}) => {
         e.preventDefault()
         let url = window.location.pathname
         let url_split = url.split('/')
-        let uid = url_split[3]
-        let token = url_split[4]
+        let uid = url_split[4]
+        let token = url_split[5]
 
         let response = await fetch(`${baseURL}/account/activate/${uid}/${token}/`, {
             method: 'GET',
@@ -144,8 +144,8 @@ export const AuthProvider = ({children}) => {
     let newUserPassword = async (e) => {
         let url = window.location.pathname
         let url_split = url.split('/')
-        let uid = url_split[4]
-        let token = url_split[5]
+        let uid = url_split[5]
+        let token = url_split[6]
 
         let response = await fetch(`${baseURL}/account/set/password/${uid}/${token}/`, {
             method: 'PUT',

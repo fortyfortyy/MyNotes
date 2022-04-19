@@ -1,5 +1,3 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
 from rest_framework import generics, permissions
 from rest_framework import status
 from rest_framework.response import Response
@@ -8,10 +6,10 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework_simplejwt.views import TokenViewBase, TokenRefreshView
 from rest_framework_simplejwt.exceptions import AuthenticationFailed, InvalidToken, TokenError
 
+from django.http import HttpResponseRedirect
 from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import smart_str
 
-from api.mixins import NotAllowedGetMethodMixin
 from users.utils import send_reset_password_email
 from users.utils import account_token
 from users.models import ProfileUser
@@ -31,6 +29,7 @@ class RegisterUserView(generics.CreateAPIView):
 
     def get(self, request, *args, **kwargs):
         return HttpResponseRedirect('/#/register')
+
 
 class ActivateAccountView(APIView):
     """
@@ -61,7 +60,8 @@ class ActivateAccountView(APIView):
             finally:
                 del profile._sendwelcomemessage
 
-            return Response({'account': 'Account has been activated!'}, status=status.HTTP_200_OK, content_type='application/javascript')
+            return Response({'account': 'Account has been activated!'}, status=status.HTTP_200_OK,
+                            content_type='application/javascript')
 
         content = {'account': 'Your link is invalid or your account is already activated'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST, content_type='application/javascript')
@@ -77,7 +77,7 @@ class CustomTokenObtainPairView(TokenViewBase):
     serializer_class = CustomTokenObtainPairSerializer
 
     def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect('/#')
+        return HttpResponseRedirect('/#/login')
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -98,7 +98,7 @@ class CustomTokenRefreshView(TokenRefreshView):
     """
 
     def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect('/#')
+        return HttpResponseRedirect('/#/404')
 
 
 class ForgottenPasswordView(generics.CreateAPIView):
@@ -109,7 +109,7 @@ class ForgottenPasswordView(generics.CreateAPIView):
     model = ProfileUser
 
     def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect('/#')
+        return HttpResponseRedirect('/#/reset/password/')
 
     def post(self, request, *args, **kwargs):
         serialized_form = self.get_serializer(data=request.data)
@@ -124,7 +124,8 @@ class ForgottenPasswordView(generics.CreateAPIView):
                 send_reset_password_email(profile)
 
         headers = self.get_success_headers(serialized_form.data)
-        return Response(serialized_form.data, status=status.HTTP_200_OK, headers=headers, content_type='application/javascript')
+        return Response(serialized_form.data, status=status.HTTP_200_OK, headers=headers,
+                        content_type='application/javascript')
 
 
 class ChangePasswordView(generics.UpdateAPIView):
@@ -136,7 +137,7 @@ class ChangePasswordView(generics.UpdateAPIView):
     serializer_class = ChangePasswordSerializer
 
     def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect('/#')
+        return HttpResponseRedirect(f"/#/set/password/{kwargs['uidb64']}/{kwargs['token']}/")
 
     def get_user(self, uidb64=None, queryset=None):
         try:
@@ -161,7 +162,8 @@ class ChangePasswordView(generics.UpdateAPIView):
     def update(self, request, *args, **kwargs):
         user = self.get_object()
         if user is None:
-            return Response({"User": "Invalid token or uidb"}, status=status.HTTP_400_BAD_REQUEST, content_type='application/javascript')
+            return Response({"User": "Invalid token or uidb"}, status=status.HTTP_400_BAD_REQUEST,
+                            content_type='application/javascript')
 
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():

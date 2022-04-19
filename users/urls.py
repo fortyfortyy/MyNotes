@@ -12,4 +12,3 @@ urlpatterns = [
     path('reset/password/', ForgottenPasswordView.as_view(), name='forgotten_password'),
     path('set/password/<uidb64>/<token>/', ChangePasswordView.as_view(), name='password_reset_confirm'),
 ]
-# handler404 = 'mynotes.views.view_404'

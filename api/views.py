@@ -5,7 +5,8 @@ from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.mixins import NotAllowedGetMethodMixin
+from django.http import HttpResponseRedirect
+
 from api.serializers import NoteSerializer
 from api.models import Note
 
@@ -26,12 +27,15 @@ class NotesListView(generics.ListAPIView):
         return Note.objects.filter(owner=user)
 
 
-class NoteCreateView(NotAllowedGetMethodMixin, generics.CreateAPIView):
+class NoteCreateView(generics.CreateAPIView):
     """
     Create a user's note
     """
     permission_classes = [IsAuthenticated]
     serializer_class = NoteSerializer
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponseRedirect('/#/login')
 
     def perform_create(self, serializer):
         user = self.request.user.pk
