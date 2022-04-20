@@ -1,13 +1,31 @@
-{% autoescape off %}
-    Welcome {{ profile.first_name }}!
+{% block subject %}Welcome to MySimpleNotes!{% endblock %}
+{% block html %}
+    <div style="background:linear-gradient(-90deg, #02203c, #001528); font-family:Lexend,sans-serif; color: #ffffff; display: grid; grid-template-rows: 0.5fr 1fr  0.5fr; padding: 50px;">
+        <div>
+            <p style="justify-content: center; padding-bottom: 30px; color: #ffffff;">
+                Hi
+                <strong style="font-size: 18px">
+                    {{ profile.first_name }}
+                </strong>
+            </p>
 
-    It's great to have you as part of the MyNotes!
-    You can create your own notes whenever and however you want to.
-    Enjoy the platform.
+        </div>
+        <div style="color: #ffffff;">
+            <p>
+                It's great to have you as part of the MySimpleNotes community!
+            </p>
+            <p>
+                You can create your own notes whenever and however you want to.
+            </p>
+            <p style="text-decoration: underline">Enjoy the platform.</p>
 
+        </div>
+        <div style="padding-top: 60px; color: #ffffff;">
+            <p style="padding-bottom: 10px; font-size: 10px">
+                Please do not respond to this email. It was generated automatically.
+            </p>
 
-    Please do not respond to this email.
-
-    Best,
-    The MySimpleNotes Team
-{% endautoescape %}
+            <p>Best, <br> The MySimpleNotes Team</p>
+        </div>
+    </div>
+{% endblock %}

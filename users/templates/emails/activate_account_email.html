@@ -1,9 +1,35 @@
-{% autoescape off %}
-    Hi {{ profile.first_name }}!
-    The MyNotes request you confirm your account. Please click the link below:
+{% block subject %}Activate your account{% endblock %}
+{% block html %}
+    <div style="background:linear-gradient(-90deg, #02203c, #001528); font-family: Lexend,sans-serif; color: #ffffff; display: grid; grid-template-rows: 0.5fr 1fr 0.5fr; padding: 50px;">
+        <div style="color: #ffffff;">
+            <p style="justify-content: center; padding-bottom: 30px"> Hi <strong
+                    style="font-size: 18px">{{ profile.first_name }}</strong></p>
+            <p>
+                You need to activate your account to be able using the application.
+            </p>
+            <p>
+                Please click the button below.
+            </p>
+        </div>
 
-    {{ domain }}{% url 'activate_account' uidb64=uid token=token %}
+        <div style="justify-self: center; align-self: center; padding-top: 40px; color: #ffffff;">
+            <a style="
+               color: rgb(0, 21, 40);
+               cursor: pointer;
+               padding: 20px;
+               border-radius: 10px;
+               background-color: #f6f9fc;
+               font-size: 15px;
+               text-decoration: none;
+               "
+               href="{{ domain }}{% url 'activate_account' uidb64=uid token=token %}"
+            >
+                Activate Account
+            </a>
+        </div>
 
-    Best,
-    The MySimpleNotes Team
-{% endautoescape %}
+        <div style="padding-top: 80px; color: #ffffff;">
+            <p>Best, <br> The MySimpleNotes Team</p>
+        </div>
+    </div>
+{% endblock %}
