@@ -49,9 +49,8 @@ else:
     CSRF_COOKIE_SECURE = False
     SECURE_SSL_REDIRECT = False
 
-ALLOWED_HOSTS = ['www.mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1', 'mysimplenotes.app',
-                 'my-own-notes.herokuapp.com', 'https://my-own-notes.herokuapp.com']
-
+ALLOWED_HOSTS = ['https://www.mysimplenotes.app', 'http://mysimplenotes.app', 'localhost', '192.168.0.8', '127.0.0.1',
+                 'mysimplenotes.app', 'my-own-notes.herokuapp.com', 'https://my-own-notes.herokuapp.com']
 
 PASSWORD_RESET_TIMEOUT = 300  # reset password token after 5 min
 
