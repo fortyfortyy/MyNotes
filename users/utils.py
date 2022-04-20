@@ -2,17 +2,15 @@ from six import text_type
 import threading
 
 #  imports needed for email
-from django.core.mail import EmailMessage
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib.sites.models import Site
+from templated_email import get_templated_mail
 
 #generate token
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 # ---
-from templated_email import get_templated_mail
 
 from mynotes import settings
 

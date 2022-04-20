@@ -6,7 +6,6 @@ from django.contrib.sites.models import Site
 #  imports needed for email
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-from django.template.loader import render_to_string
 
 from users.models import ProfileUser
 from users.utils import account_token
