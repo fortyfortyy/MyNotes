@@ -42,7 +42,7 @@ account_token = TokenGenerator()
 def send_reset_password_email(profile):
     current_domain = Site.objects.get_current().domain
     email_template = get_templated_mail(
-        template_name='password-reset_email.html',
+        template_name='password_reset_email.html',
         from_email=settings.EMAIL_HOST_USER,
         to=[profile.email],
         context={
