@@ -25,7 +25,6 @@ let getContent = (note) => {
 }
 
 const ListItem = ({ note }) => {
-
     return (
         <Link to={`/notes/${ note.id }/`}>
             <NotesListItem>

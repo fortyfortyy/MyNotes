@@ -219,7 +219,7 @@ export const NavLink = styled.a`
     font-size: 1.5rem;
     line-height: 32px;
     color: rgba(255, 255, 255, 0.75);
-    transition: 0.4s ease;
+    transition: 0.2s;
     border: none;
     
     
@@ -227,7 +227,7 @@ export const NavLink = styled.a`
         color: #fff;
         opacity: 1;
         cursor: pointer;
-        border-bottom: 1px solid #fff;
+        border-bottom: 2px solid #626ee3;
     }
     
     @media screen and (max-width: 640px) {

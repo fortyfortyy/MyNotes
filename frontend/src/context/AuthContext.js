@@ -6,22 +6,40 @@ import {toast} from 'react-toastify';
 const AuthContext = createContext()
 export default AuthContext;
 
-
 export const AuthProvider = ({children}) => {
 
     // try to get ONCE (thanks to arrow function after useState) the authTokens from the local storage, if there's nothing, return null
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
+    let [demoUser, setDemoUserState] = useState(true)
+    let [demoNotes, setDemoNotes] = useState(() => localStorage.getItem('demoNotes') ? JSON.parse(localStorage.getItem('demoNotes')) : [])
+
+    let setDemoUser = () => {
+        // if user is authenticated, set demoUser to false.
+        if (user) {
+            setDemoUserFalse()
+        }
+
+        // If user is not authenticated, and wants to use demo notes set userDemo to true
+        if (!demoUser) {
+            setDemoUserState(true)
+        }
+    }
+
+    let setDemoUserFalse = () => {
+        setDemoUserState(false)
+    }
 
     // when the page is first loaded, trigger this and make sure we have a new token generated
     let [loading, setLoading] = useState(true)
 
     const history = useHistory() // can't use Redirect, instead need to use that method
-    const params = useParams()
+    // const params = useParams()
 
     const [captchaResult, setCaptchaResult] = useState()
 
-    const baseURL = 'http://192.168.0.8:8000'
+    // const baseURL = 'http://192.168.0.8:8000'
+    const baseURL = 'https://my-own-notes.herokuapp.com'
 
     let registerUser = async (e) => {
         let response = await fetch(`${baseURL}/account/api/register/`, {
@@ -73,7 +91,7 @@ export const AuthProvider = ({children}) => {
                 'token': e.token,
             })
         })
-        let data = await response.json()
+        await response.json()
         if (response.status === 200) {
             toast.success("Your account has been activated!", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -91,7 +109,7 @@ export const AuthProvider = ({children}) => {
                 containerId: 'loginPage',
             })
         }
-        history.push('/')
+        goToHomePage()
     }
 
 
@@ -117,7 +135,7 @@ export const AuthProvider = ({children}) => {
                 position: toast.POSITION.TOP_RIGHT,
                 containerId: 'loginPage',
             })
-            history.push('/') // redirect user to homepage
+            goToHomePage() // redirect user to homepage
         } else {
             toast.error(data['detail'], {
                 position: "top-center",
@@ -141,7 +159,7 @@ export const AuthProvider = ({children}) => {
                 containerId: 'loginPage',
             })
         }
-        history.push('/')
+        goToHomePage()
     }
 
 
@@ -165,7 +183,7 @@ export const AuthProvider = ({children}) => {
         })
         await response.json()
         if (response.status === 200) {
-            history.push('/')
+            goToHomePage()
             toast.success("Your password has been changed!", {
                 position: toast.POSITION.TOP_RIGHT,
                 containerId: 'loginPage',
@@ -219,6 +237,7 @@ export const AuthProvider = ({children}) => {
         })
     }
 
+
     let handleRecaptcha = async (e) => {
         let response = await fetch(`${baseURL}/api/recaptcha/`, {
             method: 'POST',
@@ -231,6 +250,12 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+
+    let goToHomePage = () => {
+        history.push('/')
+    }
+
+
     let contextData = {
         setUser: setUser,
         setAuthTokens: setAuthTokens,
@@ -242,7 +267,12 @@ export const AuthProvider = ({children}) => {
         logoutUser: logoutUser,
         resetPasswordUser: resetPasswordUser,
         newUserPassword: newUserPassword,
+        setDemoUser: setDemoUser,
+        setDemoNotes: setDemoNotes,
+        demoNotes: demoNotes,
+        setDemoUserFalse: setDemoUserFalse,
         user: user,
+        demoUser: demoUser,
         authTokens: authTokens,
     }
 

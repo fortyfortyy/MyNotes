@@ -26,10 +26,18 @@ export const NotesCount = styled.p`
 export const NotesList = styled.div`
   padding: 0;
   margin: 16px 0;
-  height: 70vh;
+  height: 60vh;
   overflow-y: auto;
   scrollbar-width: none; 
   &:-webkit-scrollbar {
        display: none;
   }
+`
+
+export const PDemoUser = styled.p`
+    text-align: center;   
+`
+
+export const NoNotes = styled.p`
+    padding-left: 16px;   
 `

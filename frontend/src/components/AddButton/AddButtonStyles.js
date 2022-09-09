@@ -19,7 +19,9 @@ export const AddButtonS = styled.button`
   color: #001528;
   
   &: > svg {
-    fill: #f6f9fc;
+    fill: #041b32;
+    width: 50x;
+    height: 50px;
   }
   
   &:hover {
@@ -30,8 +32,6 @@ export const AddButtonS = styled.button`
   
   @media screen and (max-width: 640px){
     font-size: 40px;
-    width: 65px;
-    height: 65px;
   }
 `
 
