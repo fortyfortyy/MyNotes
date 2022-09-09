@@ -95,8 +95,7 @@ export const Input = styled.input`
 export const DivButton = styled.div`
     display: grid;
     max-width: 70%;
-    margin: 30px 10px;
-    grid-gap: 2rem;
+    margin: 10px 10px;
     justify-items: center;
     align-items: center;
     
@@ -105,7 +104,7 @@ export const DivButton = styled.div`
     }
     
     @media screen and (max-width: 640px) {
-       grid-gap: 0;
+       grid-gap: 10px;
        max-width: 100%;     
     }
 `
@@ -153,6 +152,24 @@ export const P2 = styled.p`
     }
 `
 
+export const P3 = styled.p`
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    
+    &:hover {
+        transition: 0.2s ease;
+        cursor: pointer; 
+    }
+    
+    @media screen and (max-width: 1024px) {
+       font-size: 15px;
+    }
+`
+
+
+
 export const LoginButton = styled.button`
     transition: 0.5s ease;
     border-radius: 10px;
@@ -171,4 +188,26 @@ export const LoginButton = styled.button`
     @media screen and (max-width: 640px) {
        font-size: 15px;
     }
+`
+
+export const DemoButton = styled.button`
+    transition: 0.5s ease;
+    border-radius: 10px;
+    width: 18%;
+    background: #626ee3;
+    border: none;
+    justify-self: center;
+    margin-top: 20px;
+    
+    &:hover {
+        outline: 0;
+        transform: scale(1.05);
+        cursor: pointer; 
+    }
+    
+    @media screen and (max-width: 640px) {
+       font-size: 15px;
+       width: 40%;
+    }
+       
 `

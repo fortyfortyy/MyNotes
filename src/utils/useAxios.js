@@ -7,7 +7,8 @@ import jwt_decode from "jwt-decode";
 import AuthContext from "../context/AuthContext";
 
 
-const baseURL = 'https://my-own-notes.herokuapp.com'
+const baseURL = 'http://192.168.0.8:8000'
+// const baseURL = 'https://my-own-notes.herokuapp.com'
 
 // Custom Hook and recomended way to override states in AuthContext
 const useAxios = () => {

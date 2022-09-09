@@ -8,19 +8,18 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 import {
     Input,
-    LoginInfo,
     LoginFormContainer,
     LoginTitle,
     LoginForm,
     P,
     LoginButton,
-    DivButton, P2
+    DivButton, P2, P3, DemoButton,
 } from "./styles/LoginPageStyles";
 import {InputError} from "../styles/application";
 
 
 const LoginPage = () => {
-    let {loginUser, handleRecaptcha, captchaResult} = useContext(AuthContext)
+    let {loginUser, handleRecaptcha, captchaResult, setDemoUser} = useContext(AuthContext)
 
     const {
         register,
@@ -32,7 +31,6 @@ const LoginPage = () => {
 
     return (
         <LoginFormContainer id="loginPage">
-            <LoginInfo>You need to be logged in to be able using this app</LoginInfo>
             <LoginForm>
                 <LoginTitle> Sign in to your account </LoginTitle>
                 <form method='POST' onSubmit={handleSubmit(loginUser)}>
@@ -103,6 +101,11 @@ const LoginPage = () => {
                         </Link>
                     </DivButton>
                 </form>
+                <DemoButton>
+                    <Link to='/' onClick={setDemoUser}>
+                        <P3>Try demo</P3>
+                    </Link>
+                </DemoButton>
             </LoginForm>
 
         </LoginFormContainer>

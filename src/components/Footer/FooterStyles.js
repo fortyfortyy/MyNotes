@@ -26,7 +26,7 @@ export const CopyrightContainer = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 0 0 10px 0;
+    padding: 6px 0px;
     font-size: 12px;
 `
 
@@ -41,16 +41,16 @@ export const FooterLinksContainer = styled.div`
 export const FooterLink = styled.a`
     color: #fff !important;
     font-size: 14px;
-    padding: 3px 0;
+    padding: 10px 0px;
     cursor: pointer;
     text-decoration: none !important;
     
     &:after {
-        border-bottom: 1px solid #fff;
+        border-bottom: 1px solid #626ee3;
         display: block;
         content: "";
-        transform: scaleX(0);
-        transition: transform 200ms ease-in-out;
+        transform: scaleX(0.7);
+        transition: transform 2000ms ease-in-out;
     }
 `
 

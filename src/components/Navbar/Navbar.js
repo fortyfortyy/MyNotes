@@ -8,7 +8,7 @@ import AuthContext from "../../context/AuthContext";
 
 
 const Header = () => {
-    let {user, logoutUser} = useContext(AuthContext)
+    let {user, logoutUser, setDemoUserFalse} = useContext(AuthContext)
 
     return (
 
@@ -25,7 +25,7 @@ const Header = () => {
                     </Div1>
                 ) : (
                     <Div11>
-                        <Link to="/">
+                        <Link to="/" onClick={setDemoUserFalse}>
                             <A>
                                 <DiDjango/>
                                 <DiReact/>
@@ -36,7 +36,7 @@ const Header = () => {
             }
 
             <Div2>
-                <Link to="/">
+                <Link to="/" onClick={setDemoUserFalse}>
                     <NavLink>My Notes</NavLink>
                 </Link>
             </Div2>
