@@ -18,3 +18,4 @@ staticfiles
 __pycache__
 */.idea
 frontend/
+my-own-notes/
