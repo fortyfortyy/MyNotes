@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
@@ -60,7 +60,7 @@ const ResetPassword = () => {
                                 ,
                             }
                         })} type={passwordShown ? "text" : "password"} placeholder='New Password'
-                               id='id_password1' required/>
+                               id='id_password1' autoComplete='new-password' required/>
 
                         <I onClick={togglePasswordVisiblity}>{eye}</I>
                     </Label>
@@ -97,7 +97,7 @@ const ResetPassword = () => {
                                 ,
                             }
                         })} type={passwordShown ? "text" : "password"} placeholder='Repeat Password'
-                               id='id_password2'
+                               id='id_password2' autoComplete='new-password'
                                required/>
                     </Label>
                     <ErrorMessage

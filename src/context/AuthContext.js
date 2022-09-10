@@ -1,6 +1,6 @@
 import {createContext, useState, useEffect} from "react";
 import jwt_decode from "jwt-decode";
-import {useHistory, useParams} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {toast} from 'react-toastify';
 
 const AuthContext = createContext()
@@ -38,7 +38,7 @@ export const AuthProvider = ({children}) => {
 
     const [captchaResult, setCaptchaResult] = useState()
 
-    // const baseURL = 'http://192.168.0.8:8000'
+    // for development
     const baseURL = 'https://my-own-notes.herokuapp.com'
 
     let registerUser = async (e) => {

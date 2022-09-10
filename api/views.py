@@ -60,6 +60,7 @@ class NoteListView(generics.RetrieveUpdateDestroyAPIView):
 
 @api_view(['POST'])
 def recaptcha(request):
+    print('sprawdzanie recaptchy')
     r = requests.post(
         'https://www.google.com/recaptcha/api/siteverify',
         data={

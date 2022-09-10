@@ -24,17 +24,17 @@ export const RegisterTitle = styled.div`
 export const RegisterForm = styled.div`
     font-size: 17px;
     width: 90%;
-    padding-top: 17px;
+    padding: 20px;
     
     & form {
         display: grid;
         justify-items: center;
-        grid-gap: 2rem;
+        grid-gap: 1.5rem;
     }
     
     @media screen and (max-width: 768px) {
        & form {
-          grid-gap: 1.42rem;
+          grid-gap: 1rem;
        }
     }
 `
@@ -109,7 +109,7 @@ export const RegisterButton = styled.button`
 
 export const I = styled.i`
     position: absolute;
-    top: 40%;
+    top: 30%;
     right: 8%;
     
     color: #05437a;
@@ -125,7 +125,6 @@ export const Label = styled.label`
     max-width: 500px;
     display: grid;
     justify-items: center;
-    padding-top: 10px;
     
     &:nth-child(1){
         max-width: 300px;

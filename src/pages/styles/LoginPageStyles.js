@@ -62,7 +62,7 @@ export const LoginForm = styled.div`
         justify-items: center;
         
         @media screen and (max-width: 724px) {
-            grid-gap: 1.3rem;
+            grid-gap: 1rem;
         }
     }
 
@@ -94,6 +94,7 @@ export const Input = styled.input`
 
 export const DivButton = styled.div`
     display: grid;
+    grid-gap: 1rem;
     max-width: 70%;
     margin: 10px 10px;
     justify-items: center;
@@ -104,7 +105,6 @@ export const DivButton = styled.div`
     }
     
     @media screen and (max-width: 640px) {
-       grid-gap: 10px;
        max-width: 100%;     
     }
 `

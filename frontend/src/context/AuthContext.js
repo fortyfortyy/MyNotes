@@ -1,6 +1,6 @@
 import {createContext, useState, useEffect} from "react";
 import jwt_decode from "jwt-decode";
-import {useHistory, useParams} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {toast} from 'react-toastify';
 
 const AuthContext = createContext()
@@ -38,8 +38,8 @@ export const AuthProvider = ({children}) => {
 
     const [captchaResult, setCaptchaResult] = useState()
 
-    // const baseURL = 'http://192.168.0.8:8000'
-    const baseURL = 'https://my-own-notes.herokuapp.com'
+    const baseURL = 'http://192.168.0.8:8000'
+    // const baseURL = 'https://my-own-notes.herokuapp.com'  for delevoplemt
 
     let registerUser = async (e) => {
         let response = await fetch(`${baseURL}/account/api/register/`, {

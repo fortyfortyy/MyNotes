@@ -42,10 +42,10 @@ const ForgotPassword = () => {
                                 message: "Email cannot exceed 50 characters",
                             },
                             pattern: {
-                                value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                 message: "Invalid email, please enter the correct one",
                             }
-                        })} type='email' name='email' placeholder='Enter email' id='id_email' required/>
+                        })} type='email' name='email' placeholder='Enter email' id='id_email' autoComplete='email' required/>
                         <ErrorMessage
                             errors={errors}
                             name="email"

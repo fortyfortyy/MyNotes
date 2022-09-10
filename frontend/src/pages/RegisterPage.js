@@ -58,7 +58,7 @@ const RegisterPage = () => {
                                 value: 3,
                                 message: "First name must exceed 3 characters",
                             },
-                        })} placeholder='Enter name' id='id_first_name' type='text'/>
+                        })} placeholder='Enter name' id='id_first_name' type='text' autoComplete='first-name' />
                     </Label>
                     <ErrorMessage
                         errors={errors}
@@ -80,10 +80,10 @@ const RegisterPage = () => {
                                 message: "Email cannot exceed 50 characters",
                             },
                             pattern: {
-                                value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                 message: "Invalid email, please enter the correct one",
                             }
-                        })} placeholder='Enter email' id='id_email' type='email'/>
+                        })} placeholder='Enter email' id='id_email' type='email' autoComplete='email' />
                     </Label>
                     <ErrorMessage
                         errors={errors}
@@ -116,7 +116,7 @@ const RegisterPage = () => {
                                     " one special character"
                                 ,
                             }
-                        })} type={passwordShown ? "text" : "password"} placeholder='Enter password' />
+                        })} type={passwordShown ? "text" : "password"} placeholder='Enter password' autoComplete='new-password' />
                         <I onClick={togglePasswordVisiblity}>{eye}</I>
                     </Label>
                     <ErrorMessage
@@ -151,7 +151,7 @@ const RegisterPage = () => {
                                 ,
                             }
                         })} type={passwordShown ? "text" : "password"} placeholder='Enter again password'
-                               id='id_password2'/>
+                               id='id_password2' autoComplete='new-password' />
                     </Label>
                     <ErrorMessage
                         errors={errors}

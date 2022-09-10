@@ -42,10 +42,10 @@ const LoginPage = () => {
                                 message: "Email cannot exceed 50 characters",
                             },
                             pattern: {
-                                value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                 message: "Invalid email, please enter the correct one",
                             }
-                        })} placeholder='Enter email' id='id_email' type='email'/>
+                        })} placeholder='Enter email' id='id_email' type='email' autoComplete='email'/>
                         <ErrorMessage
                             errors={errors}
                             name="email"
@@ -70,7 +70,7 @@ const LoginPage = () => {
                                 value: 8,
                                 message: "Password must exceed 8 characters",
                             },
-                        })} type='password' placeholder='Enter password' id='id_password'/>
+                        })} type='password' placeholder='Enter password' id='id_password' autoComplete='current-password'/>
                         <ErrorMessage
                             errors={errors}
                             name="password"

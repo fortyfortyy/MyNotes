@@ -39,6 +39,7 @@ export const InputError = styled.p`
     font-size: 14px;
     text-align: center;
     margin: 0;
+    padding-top: 5px;
     
     &:before {
         display: inline;
