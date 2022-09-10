@@ -76,7 +76,7 @@ export const AuthProvider = ({children}) => {
 
     let activateAccount = async (e) => {
         e.preventDefault()
-        let url = window.location.pathname
+        let url = window.location.hash
         let url_split = url.split('/')
         let uid = url_split[3]
         let token = url_split[4]
@@ -91,25 +91,30 @@ export const AuthProvider = ({children}) => {
                 'token': e.token,
             })
         })
-        await response.json()
+        let data = await response.json()
+        console.log('----------------DATA-----------------')
         if (response.status === 200) {
+            console.log('Status is 200')
             toast.success("Your account has been activated!", {
                 position: toast.POSITION.TOP_RIGHT,
                 containerId: 'loginPage',
             })
 
         } else if (response.status === 400) {
+            console.log('Status is 400')
             toast.error('Link is invalid', {
                 position: toast.POSITION.TOP_CENTER,
                 containerId: 'loginPage',
             })
         } else {
+            console.log('Another err')
             toast.error('Something gone wrong! If the problem repeat, please contanct support', {
                 position: toast.POSITION.TOP_CENTER,
                 containerId: 'loginPage',
             })
         }
-        goToHomePage()
+        console.log('Redirect to login page')
+        history.push('/login')
     }
 
 
@@ -164,7 +169,7 @@ export const AuthProvider = ({children}) => {
 
 
     let newUserPassword = async (e) => {
-        let url = window.location.pathname
+        let url = window.location.hash
         let url_split = url.split('/')
         let uid = url_split[4]
         let token = url_split[5]

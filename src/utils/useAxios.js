@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode";
 
 import AuthContext from "../context/AuthContext";
 
-// for development
+
 const baseURL = 'https://my-own-notes.herokuapp.com'
 
 // Custom Hook and recomended way to override states in AuthContext
