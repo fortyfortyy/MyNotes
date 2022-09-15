@@ -91,10 +91,10 @@ const LoginPage = () => {
 
                     <DivButton>
                         {
-                            captchaResult && <LoginButton type="submit">Sign In</LoginButton>
+                            captchaResult && <LoginButton type="submit">Log In</LoginButton>
                         }
                         <Link to='/reset/password'>
-                            <P>Forgotten password?</P>
+                            <P>Forgot password?</P>
                         </Link>
                         <Link to='/register'>
                             <P2>Create account</P2>
@@ -102,8 +102,8 @@ const LoginPage = () => {
                     </DivButton>
                 </form>
                 <DemoButton>
-                    <Link to='/' onClick={setDemoUser}>
-                        <P3>Try demo</P3>
+                    <Link to='/notes' onClick={setDemoUser}>
+                        Try Demo
                     </Link>
                 </DemoButton>
             </LoginForm>

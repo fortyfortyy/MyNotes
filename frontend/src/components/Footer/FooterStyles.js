@@ -28,6 +28,7 @@ export const CopyrightContainer = styled.div`
     align-items: center;
     padding: 6px 0px;
     font-size: 12px;
+    color: #fff!important;
 `
 
 export const FooterLinksContainer = styled.div`

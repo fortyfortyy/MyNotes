@@ -1,12 +1,12 @@
-import React from "react";
-import {Route, Switch} from 'react-router-dom';
+import React, {useContext} from "react";
+import {Route, Switch, Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 import './App.css';
 import {MainContainer} from "./styles/application";
 
 import PrivateRoute from './utils/PrivateRoute';
-import {AuthProvider} from './context/AuthContext';
+import AuthContext from './context/AuthContext';
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
@@ -15,8 +15,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import ActivateAccount from "./pages/ActivateAccount";
-
-
+import MainPage from './pages/MainPage';
 import NotesListPage from "./pages/NotesListPage";
 import NotePage from "./pages/NotePage";
 
@@ -25,28 +24,37 @@ import PageNotFound from "./components/PageNotFound/PageNotFoundStyles";
 
 
 const App = () => {
+    let {user} = useContext(AuthContext)
     axios.defaults.xsrfCookieName = 'csrftoken'
     axios.defaults.xsrfHeaderName = 'X-CSRFToken'
     return (
         <MainContainer>
-            <AuthProvider>
-                <Navbar/>
+            <Navbar/>
 
-                <Switch>
-                    <Route path='/login' component={LoginPage}/>
-                    <Route path='/register' component={RegisterPage}/>
-                    <Route path='/reset/password' component={ForgotPassword}/>
-                    <Route path='/account/set/password/:uid/:token' component={ResetPassword}/>
-                    <Route path='/account/activate/:uid/:token' component={ActivateAccount}/>
+            <Switch>
+                <Route path='/home' component={MainPage}/>
+                <Route path='/reset/password' component={ForgotPassword}/>
+                <Route path='/account/set/password/:uid/:token' component={ResetPassword}/>
+                <Route path='/account/activate/:uid/:token' component={ActivateAccount}/>
 
-                    <PrivateRoute exact path='/' component={NotesListPage}/>
-                    <PrivateRoute exact path='/notes/:id' component={NotePage}/>
+                <PrivateRoute exact path='/notes' component={NotesListPage}/>
+                <PrivateRoute exact path='/notes/:id' component={NotePage}/>
 
-                    <Route component={PageNotFound}/>
-                </Switch>
+                {
+                    !user ? <Route path='/login' component={LoginPage}/> : <Redirect to='/notes'/>
+                }
+                {
+                    !user ? <Route path='/register' component={RegisterPage}/> : <Redirect to='/notes'/>
+                }
 
-                <Footer/>
-            </AuthProvider>
+                <Route exact path='/'>
+                    {user ? <Redirect to='/notes'/> : <Redirect to='/home'/>}
+                </Route>
+
+                <Route component={PageNotFound}/>
+            </Switch>
+
+            <Footer/>
         </MainContainer>
     )
 }

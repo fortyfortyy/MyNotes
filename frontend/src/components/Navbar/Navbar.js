@@ -3,7 +3,7 @@ import React, {useContext} from 'react';
 import {AiFillGithub, AiFillLinkedin} from 'react-icons/ai';
 import {DiDjango, DiReact} from 'react-icons/di';
 
-import {Container, Div1, Div2, Div3, DivUser, NavLink, SocialIcons, A, Div4, Div11} from './NavbarStyles';
+import {Container, Div1, Div2, Div3, DivUser, NavLink, SocialIcons, A, Div4, Div11, LoginButton} from './NavbarStyles';
 import AuthContext from "../../context/AuthContext";
 
 
@@ -16,7 +16,7 @@ const Header = () => {
             {
                 user ? (
                     <Div1>
-                        <Link to="/">
+                        <Link to="/notes">
                             <A>
                                 <DiDjango/>
                                 <DiReact/>
@@ -25,7 +25,7 @@ const Header = () => {
                     </Div1>
                 ) : (
                     <Div11>
-                        <Link to="/" onClick={setDemoUserFalse}>
+                        <Link to="/home" onClick={setDemoUserFalse}>
                             <A>
                                 <DiDjango/>
                                 <DiReact/>
@@ -36,9 +36,17 @@ const Header = () => {
             }
 
             <Div2>
-                <Link to="/" onClick={setDemoUserFalse}>
-                    <NavLink>My Notes</NavLink>
-                </Link>
+                {
+                    user ? (
+                        <Link to="/notes">
+                            <NavLink>My Notes</NavLink>
+                        </Link>
+                    ) : (
+                        <Link to="/home" onClick={setDemoUserFalse}>
+                            <NavLink>My Notes</NavLink>
+                        </Link>
+                    )
+                }
             </Div2>
 
             {user && <DivUser><p><strong>Hi</strong>, {user.name}</p></DivUser>}
@@ -63,6 +71,9 @@ const Header = () => {
                         <SocialIcons href="https://www.linkedin.com/in/daniel-pacek/">
                             <AiFillLinkedin size="2rem"/>
                         </SocialIcons>
+                        <LoginButton>
+                            <Link to='/login' role='button'>Log In</Link>
+                        </LoginButton>
                     </Div4>
                 )
             }

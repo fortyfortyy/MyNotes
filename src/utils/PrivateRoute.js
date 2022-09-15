@@ -6,8 +6,8 @@ import AuthContext from "../context/AuthContext";
 const PrivateRoute = ({children, ...rest}) => {
     let {user, demoUser} = useContext(AuthContext)
     return (
-        // if user is not logged in, redirect to the login page
-        <Route {...rest}>{!demoUser && !user ? <Redirect to="/login" />: children}</Route>
+        // if user is not logged in, redirect to the home page
+        <Route {...rest}>{!demoUser && !user ? <Redirect to="/home" />: children}</Route>
     )
 }
 

@@ -1,6 +1,6 @@
 import {createContext, useState, useEffect} from "react";
 import jwt_decode from "jwt-decode";
-import {useHistory} from "react-router-dom";
+import {useHistory, Redirect} from "react-router-dom";
 import {toast} from 'react-toastify';
 
 const AuthContext = createContext()
@@ -11,23 +11,21 @@ export const AuthProvider = ({children}) => {
     // try to get ONCE (thanks to arrow function after useState) the authTokens from the local storage, if there's nothing, return null
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
-    let [demoUser, setDemoUserState] = useState(true)
+    let [demoUser, setDemoUserState] = useState(null)
     let [demoNotes, setDemoNotes] = useState(() => localStorage.getItem('demoNotes') ? JSON.parse(localStorage.getItem('demoNotes')) : [])
 
     let setDemoUser = () => {
         // if user is authenticated, set demoUser to false.
         if (user) {
-            setDemoUserFalse()
+            setDemoUserState(false)
+            console.log('Ustawienie Demo User na false: ', demoUser)
+            return
         }
 
         // If user is not authenticated, and wants to use demo notes set userDemo to true
-        if (!demoUser) {
+        if (!user && !demoUser) {
             setDemoUserState(true)
         }
-    }
-
-    let setDemoUserFalse = () => {
-        setDemoUserState(false)
     }
 
     // when the page is first loaded, trigger this and make sure we have a new token generated
@@ -63,7 +61,7 @@ export const AuthProvider = ({children}) => {
             })
             setTimeout(function () {
                 history.push('/login')
-            }, 7000);
+            }, 6000);
 
         } else {
             toast.error('Something gone wrong, check your form', {
@@ -91,7 +89,6 @@ export const AuthProvider = ({children}) => {
             })
         })
         let data = await response.json()
-        console.log('----------------DATA-----------------')
         if (response.status === 200) {
             console.log('Status is 200')
             toast.success("Your account has been activated!", {
@@ -112,7 +109,6 @@ export const AuthProvider = ({children}) => {
                 containerId: 'loginPage',
             })
         }
-        console.log('Redirect to login page')
         history.push('/login')
     }
 
@@ -133,13 +129,14 @@ export const AuthProvider = ({children}) => {
             // decode access token that store user information
             setUser(jwt_decode(data.access))
 
-            // Set localstorage user's access token, whenever user comes back e.g next day, still can be logged in
+            // Set localstorage user's access token, whenever user comes back e.g. next day, still can be logged in
             localStorage.setItem('authTokens', JSON.stringify(data))
             toast.success("Hey 👋 you are logged in!", {
                 position: toast.POSITION.TOP_RIGHT,
-                containerId: 'loginPage',
+                containerId: 'notesPage',
             })
-            goToHomePage() // redirect user to homepage
+            // Set DemoUser to false because user is logged in
+            setDemoUserState(false)
         } else {
             toast.error(data['detail'], {
                 position: "top-center",
@@ -163,7 +160,6 @@ export const AuthProvider = ({children}) => {
                 containerId: 'loginPage',
             })
         }
-        goToHomePage()
     }
 
 
@@ -187,18 +183,18 @@ export const AuthProvider = ({children}) => {
         })
         await response.json()
         if (response.status === 200) {
-            goToHomePage()
             toast.success("Your password has been changed!", {
                 position: toast.POSITION.TOP_RIGHT,
                 containerId: 'loginPage',
             })
+            history.push('/')
         } else {
             toast.error("Something gone wrong, try again later", {
                 position: toast.POSITION.TOP_CENTER,
             })
             setTimeout(function () {
                 window.location.replace('/reset/password');
-            }, 7000);
+            }, 6000);
         }
     }
 
@@ -234,10 +230,9 @@ export const AuthProvider = ({children}) => {
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem('authTokens')
-        history.push('/login')
         toast.warning("You are successfully logged out", {
             position: toast.POSITION.TOP_RIGHT,
-            containerId: 'loginPage',
+            containerId: 'homePage',
         })
     }
 
@@ -255,11 +250,6 @@ export const AuthProvider = ({children}) => {
     }
 
 
-    let goToHomePage = () => {
-        history.push('/')
-    }
-
-
     let contextData = {
         setUser: setUser,
         setAuthTokens: setAuthTokens,
@@ -274,7 +264,6 @@ export const AuthProvider = ({children}) => {
         setDemoUser: setDemoUser,
         setDemoNotes: setDemoNotes,
         demoNotes: demoNotes,
-        setDemoUserFalse: setDemoUserFalse,
         user: user,
         demoUser: demoUser,
         authTokens: authTokens,

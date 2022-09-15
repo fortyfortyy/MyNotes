@@ -18,7 +18,9 @@ import {
     Input,
     RegisterButton,
     DivButton,
-    P, I, Label
+    P,
+    I,
+    Label,
 } from "./styles/RegisterPageStyles";
 import {InputError} from "../styles/application";
 
@@ -176,7 +178,7 @@ const RegisterPage = () => {
                         }
                         <Link to='/login'>
                             <P>
-                                <strong>Already </strong> have an account?
+                                <strong>Already </strong> registered? Log In
                             </P>
                         </Link>
                     </DivButton>

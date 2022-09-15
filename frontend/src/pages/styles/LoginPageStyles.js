@@ -55,6 +55,7 @@ export const LoginForm = styled.div`
     display: grid;
     font-size: 17px;
     width: 90%;
+    justify-items: center;
     
     & form {
         display: grid;
@@ -177,7 +178,7 @@ export const LoginButton = styled.button`
     padding: 10px 20px;
     grid-area: 1/ 1/ 1/ 4;
     width: 50%;
-    color: #001528;
+    color: #02203c;
     
     &:hover {
         outline: 0;
@@ -190,14 +191,25 @@ export const LoginButton = styled.button`
     }
 `
 
-export const DemoButton = styled.button`
-    transition: 0.5s ease;
-    border-radius: 10px;
-    width: 18%;
-    background: #626ee3;
-    border: none;
-    justify-self: center;
-    margin-top: 20px;
+export const DemoButton = styled.a`
+    width: 20%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    height: 50px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 50%);
+    background-color: #626ee3;
+    opacity: 1;
+    position: relative;
+    transform: scale(1);
+    transition: opacity .4s,transform .4s;
+    border-radius: 4px;
+    color: #fff !important;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    white-space: nowrap;
+    align-items: center;
     
     &:hover {
         outline: 0;
@@ -205,9 +217,7 @@ export const DemoButton = styled.button`
         cursor: pointer; 
     }
     
-    @media screen and (max-width: 640px) {
-       font-size: 15px;
-       width: 40%;
-    }
-       
+    & > a {
+        width: 100%;
+    }   
 `

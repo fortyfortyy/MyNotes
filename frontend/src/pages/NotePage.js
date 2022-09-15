@@ -16,7 +16,10 @@ const NotePage = ({match, history}) => {
     let [note, setNote] = useState(null) // before adding things, note will be null
     let {authTokens, demoUser, demoNotes} = useContext(AuthContext)
 
+    let [oldNote, setOldNote] = useState(false)
+
     let baseURL = 'http://192.168.0.8:8000'
+
 
     useEffect(() => {
         getNote();
@@ -54,7 +57,7 @@ const NotePage = ({match, history}) => {
             // shows the info that note has been created
             toast.success("Note has been created!", {
                 position: toast.POSITION.TOP_RIGHT,
-                autoClose: 1500,
+                autoClose: 1000,
             })
             return
         }
@@ -72,7 +75,7 @@ const NotePage = ({match, history}) => {
         if (response.status === 201) {
             toast.success("Note has been created!", {
                 position: toast.POSITION.TOP_RIGHT,
-                autoClose: 1500,
+                autoClose: 1000,
             })
 
         } else {
@@ -91,25 +94,34 @@ const NotePage = ({match, history}) => {
             return
         }
 
-        let response = await fetch(`${baseURL}/api/notes/${noteId}/`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + String(authTokens.access)
-            },
-            body: JSON.stringify({...note})
-        })
+        // if oldNote is not empty then gonna check the rest of condition
+        if (oldNote && oldNote.body !== note.body) {
 
-        await response.json()
-        if (response.status === 200) {
-            toast.success("Note has been saved!", {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: 1500,
+            let response = await fetch(`${baseURL}/api/notes/${noteId}/`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + String(authTokens.access)
+                },
+                body: JSON.stringify({...note})
             })
+
+            await response.json()
+            if (response.status === 200) {
+                toast.success("Note has been saved!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 1000,
+                })
+            } else {
+                toast.error("Something gone wrong. Please try again. " +
+                    "If the problem happen again, please contact support", {
+                    position: toast.POSITION.TOP_RIGHT,
+                })
+            }
         } else {
-            toast.error("Something gone wrong. Please try again. " +
-                "If the problem happen again, please contact support", {
+            toast.info("Nothing was changed.", {
                 position: toast.POSITION.TOP_RIGHT,
+                autoClose: 1000,
             })
         }
     }
@@ -125,7 +137,7 @@ const NotePage = ({match, history}) => {
                 autoClose: 1000,
             })
 
-            goToHomePage()
+            goToNotesPage()
             return
         }
 
@@ -142,6 +154,7 @@ const NotePage = ({match, history}) => {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 1000,
         })
+        goToNotesPage()
     }
 
     let handleSubmit = () => {
@@ -152,18 +165,18 @@ const NotePage = ({match, history}) => {
         } else if (noteId === 'new' && note.body) {
             createNote()
         }
-        goToHomePage()
+        goToNotesPage()
     }
 
-    let goToHomePage = () => {
-        history.push('/')
+    let goToNotesPage = () => {
+        history.push('/notes')
     }
 
     return (
         <DivApp>
             <NoteHeader>
                 <H2>
-                    <Link to='/'>
+                    <Link to='/notes'>
                         <ArrowLeft onClick={handleSubmit}/>
                     </Link>
                 </H2>
@@ -177,7 +190,7 @@ const NotePage = ({match, history}) => {
                 {noteId !== 'new' ? (
                     <Button onClick={deleteNote}>Delete</Button>
                 ) : (
-                    <Link to='/'>
+                    <Link to='/notes'>
                         <Button onClick={handleSubmit}>Done</Button>
                     </Link>
                 )
@@ -185,6 +198,7 @@ const NotePage = ({match, history}) => {
             </NoteHeader>
 
             <TextArea onChange={(e) => {
+                setOldNote({...note})
                 setNote({...note, 'body': e.target.value})
             }} value={note?.body}>
 
