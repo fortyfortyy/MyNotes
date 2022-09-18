@@ -65,6 +65,7 @@ export const DivButton = styled.div`
     color: #001528;
     
     @media screen and (max-width: 640px) {
+       max-width: 75%;
        font-size: 15px;
     }
 `
