@@ -18,7 +18,6 @@ export const AuthProvider = ({children}) => {
         // if user is authenticated, set demoUser to false.
         if (user) {
             setDemoUserState(false)
-            console.log('Ustawienie Demo User na false: ', demoUser)
             return
         }
 
@@ -90,20 +89,17 @@ export const AuthProvider = ({children}) => {
         })
         let data = await response.json()
         if (response.status === 200) {
-            console.log('Status is 200')
             toast.success("Your account has been activated!", {
                 position: toast.POSITION.TOP_RIGHT,
                 containerId: 'loginPage',
             })
 
         } else if (response.status === 400) {
-            console.log('Status is 400')
             toast.error('Link is invalid', {
                 position: toast.POSITION.TOP_CENTER,
                 containerId: 'loginPage',
             })
         } else {
-            console.log('Another err')
             toast.error('Something gone wrong! If the problem repeat, please contanct support', {
                 position: toast.POSITION.TOP_CENTER,
                 containerId: 'loginPage',

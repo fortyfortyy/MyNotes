@@ -48,6 +48,8 @@ export const LoginTitle = styled.div`
     @media screen and (max-width: 768px) {
        font-size: 20px;
        padding: 20px 0px;
+       align-self: center;
+       padding-top: 30px;
     }
 `
 
@@ -62,7 +64,7 @@ export const LoginForm = styled.div`
         grid-gap: 1.5rem;
         justify-items: center;
         
-        @media screen and (max-width: 724px) {
+        @media screen and (max-width: 820px) {
             grid-gap: 1rem;
         }
     }
@@ -217,7 +219,15 @@ export const DemoButton = styled.a`
         cursor: pointer; 
     }
     
-    & > a {
+    // & > a {
+    //     width: 50%;
+    // }
+    
+    @media screen and (max-width: 640px) {
+       width: 50%;
+       & > a {
         width: 100%;
-    }   
+       }
+    }
+    
 `
