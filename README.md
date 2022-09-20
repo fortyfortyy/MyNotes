@@ -34,7 +34,7 @@ Application also has implemented login/register/forget password system.
 * Heroku
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Features:
+## Features
 * User profile
   - Sign up
   - Log in
